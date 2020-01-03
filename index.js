@@ -22,19 +22,20 @@ window.addEventListener('load', _ => {
         if (!throttled) {
             throttled = true;
             setTimeout((event) => {
+                console.log(new Date().getTime())
                 if (positionLocked) {
                     op.innerHTML = '';
                     if (xCheckbox.checked && Math.abs(event.alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
                         op.innerHTML = `Out Of posture by x`
-                        window.navigator.vibrate([200, 100, 200]);
+                        window.navigator.vibrate([100]);
                     }
                     if (yCheckbox.checked && Math.abs(event.beta - lockedAxis.y) > Number.parseFloat(delta.value)) {
                         op.innerHTML += `Out Of posture by Y`
-                        window.navigator.vibrate([200, 100, 200]);
+                        window.navigator.vibrate([200]);
                     }
                     if (zCheckbox.checked && Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
                         op.innerHTML += `Out Of posture by Z`
-                        window.navigator.vibrate([200, 100, 200]);
+                        window.navigator.vibrate([200]);
                     }
 
                 }
