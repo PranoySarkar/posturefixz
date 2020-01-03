@@ -32,11 +32,24 @@ window.addEventListener('load', _ => {
         }
         else {
             axe = event.alpha;
-            xDom.innerHTML = `X ${axe}`;
+            if (xCheckbox.checked) {
+                xDom.innerHTML = `X ${axe}`;
+            }else{
+                xDom.innerHTML=''
+            }
             ye = event.beta;
-            yDom.innerHTML = `Y ${ye}`;
+            if (yCheckbox.checked) {
+                yDom.innerHTML = `Y ${ye}`;
+            }
+            else{
+                yDom.innerHTML=''
+            }
             zee = event.gamma;
-            zDom.innerHTML = `Z ${zee}`;
+            if (zCheckbox.checked) {
+                zDom.innerHTML = `Z ${zee}`;
+            }else{
+                zDom.innerHTML=''
+            }
         }
     })
 
