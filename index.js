@@ -21,12 +21,15 @@ window.addEventListener('load', _ => {
             op.innerHTML = '';
             if (xCheckbox.checked && Math.abs(event.alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
                 op.innerHTML = `Out Of posture by x`
+                window.navigator.vibrate([50, 50, 50]);
             }
             if (yCheckbox.checked && Math.abs(event.beta - lockedAxis.y) > Number.parseFloat(delta.value)) {
                 op.innerHTML += `Out Of posture by Y`
+                window.navigator.vibrate([50, 20, 50]);
             }
             if (zCheckbox.checked && Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
                 op.innerHTML += `Out Of posture by Z`
+                window.navigator.vibrate([50, 80, 50]);
             }
 
         }
