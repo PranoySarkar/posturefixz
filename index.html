@@ -5,16 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
     <script src="index.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Posture Fix</title>
 </head>
 
 <body>
-    <div class="box">
-        <canvas id="lineChart" height="450" width="800"></canvas>
+    <div class="output" id="x"></div>
+    <div class="output" id="y"></div>
+    <div class="output" id="z"></div>
+    <div class="output" id="op"></div>
+    <div class="controllers">
+        <button id="lockBtn">Lock</button>
+        <input type="text" id="delta" value="2">
+        x<input type="checkbox" checked=true id='xCheckbox'>
+        y<input type="checkbox" checked=true id='yCheckbox'>
+        z<input type="checkbox" checked=true id='zCheckbox'>
     </div>
-
 </body>
 
 </html>

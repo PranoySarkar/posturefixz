@@ -1,71 +1,49 @@
 window.addEventListener('load', _ => {
 
-    var data = {
-        labels: [0],
-        datasets: [
-            {
-                label: "alpha",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [0]
-            },
-            {
-                label: "beta",
-                fillColor: "rgba(100,187,205,0.2)",
-                strokeColor: "rgba(100,187,205,1)",
-                pointColor: "rgba(100,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [0]
-            },
-            {
-                label: "gama",
-                fillColor: "rgba(200,187,205,0.2)",
-                strokeColor: "rgba(200,187,205,1)",
-                pointColor: "rgba(200,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [0]
-            }
-        ]
-    };
+    let axe = 0;
+    let ye = 0;
+    let zee = 0;
+    let lockedAxis = {};
+    let positionLocked = false
 
-
-    let counter = 1;
     let flag = true;
+    let xDom = document.querySelector('#x');
+    let yDom = document.querySelector('#y');
+    let zDom = document.querySelector('#z');
+    let op = document.querySelector('#op');
+    let delta = document.querySelector('#delta');
+    let xCheckbox = document.querySelector('#xCheckbox');
+    let yCheckbox = document.querySelector('#yCheckbox');
+    let zCheckbox = document.querySelector('#zCheckbox');
     window.addEventListener('deviceorientation', (event) => {
 
+        if (positionLocked) {
+            op.innerHTML = '';
+            if (xCheckbox.checked && Math.abs(event.alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
+                op.innerHTML = `Out Of posture by x`
+            }
+            if (yCheckbox.checked && Math.abs(event.beta - lockedAxis.y) > Number.parseFloat(delta.value)) {
+                op.innerHTML += `Out Of posture by Y`
+            }
+            if (zCheckbox.checked && Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
+                op.innerHTML += `Out Of posture by Z`
+            }
 
-        if (flag = true) {
-            flag = false;
-            setTimeout((event) => {
-                data.labels.push(counter++)
-                data.datasets[0].data.push(event.alpha);
-               // data.datasets[1].data.push(event.beta);
-               // data.datasets[2].data.push(event.gamma);
-                console.log(event.alpha, event.beta, event.gamma)
-                var ctx = document.getElementById("lineChart").getContext("2d");
-                new Chart(ctx).Line(data,
-                    { animation: false }
-                );
-                flag = true;
-            }, 100, event)
         }
-
+        else {
+            axe = event.alpha;
+            xDom.innerHTML = `X ${axe}`;
+            ye = event.beta;
+            yDom.innerHTML = `Y ${ye}`;
+            zee = event.gamma;
+            zDom.innerHTML = `Z ${zee}`;
+        }
     })
 
-    var chart = null;
-    function displayLineChart() {
-
-        var ctx = document.getElementById("lineChart").getContext("2d");
-        var options = {};
-        chart = new Chart(ctx).Line(data, options);
-    }
-    displayLineChart();
+    document.querySelector('#lockBtn').addEventListener('click', _ => {
+        lockedAxis.x = axe;
+        lockedAxis.y = ye;
+        lockedAxis.z = zee;
+        positionLocked = !positionLocked;
+    })
 })
