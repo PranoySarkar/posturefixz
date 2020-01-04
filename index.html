@@ -5,9 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="index.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript">
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register( window.location.href + 'service-worker.js')
+                .then(function() { 
+                    console.log("Service Worker Registered"); 
+            });
+        }
+    </script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="css/main.css">
     <title>Posture Fix</title>
+
 </head>
 
 <body>
@@ -22,7 +32,7 @@
         y<input type="checkbox" checked=true id='yCheckbox'>
         z<input type="checkbox" checked=true id='zCheckbox'>
     </div>
-    v1
+    v2
 </body>
 
 </html>
