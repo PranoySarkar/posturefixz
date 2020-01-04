@@ -2,7 +2,7 @@
   "name": "my-new-pwa",
   "short_name": "my-new-pwa",
   "start_url": "/posturefixz/index.html",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "portrait",
   "background_color": "#fff",
   "theme_color": "#000",
