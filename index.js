@@ -43,6 +43,7 @@ window.addEventListener('load', _ => {
                         notifyIncorrectPosture();
                     }
                     if(goodPosition){
+                        op.innerHTML += `Good Possition detected`
                         window.navigator.vibrate([100,100,100]);
                         clearInterval(incorrectPostureTimer);
                         incorrectPostureTimer=null;
