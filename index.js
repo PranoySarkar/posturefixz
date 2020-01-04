@@ -45,14 +45,15 @@ window.addEventListener('load', _ => {
                     if(goodPosition){
                         op.innerHTML += `Good Possition detected`
                         if(incorrectPostureTimer!=null){
-                            window.navigator.vibrate([100]);
                             clearInterval(incorrectPostureTimer);
                             incorrectPostureTimer=null;
+                            window.navigator.vibrate([100,50,50]);
                         }
                     }
 
                 }
                 else {
+                    op.innerHTML += ``
                     clearInterval(incorrectPostureTimer)
                     incorrectPostureTimer=null;
                     axe = Math.round(event.alpha);
