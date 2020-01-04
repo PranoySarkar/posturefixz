@@ -24,36 +24,47 @@ window.addEventListener('load', _ => {
             setTimeout((event) => {
                 console.log(new Date().getTime())
                 if (positionLocked) {
+                    let goodPosition = true;
                     op.innerHTML = '';
                     if (xCheckbox.checked && Math.abs(event.alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
-                        op.innerHTML = `Out Of posture by x`
-                        window.navigator.vibrate([100]);
+                        op.innerHTML = `Out Of posture by x<br/>`
+                        goodPosition=false;
+                        notifyIncorrectPosture();
+
                     }
                     if (yCheckbox.checked && Math.abs(event.beta - lockedAxis.y) > Number.parseFloat(delta.value)) {
-                        op.innerHTML += `Out Of posture by Y`
-                        window.navigator.vibrate([200]);
+                        op.innerHTML += `Out Of posture by Y<br/>`
+                        goodPosition=false;
+                        notifyIncorrectPosture();
                     }
                     if (zCheckbox.checked && Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
-                        op.innerHTML += `Out Of posture by Z`
-                        window.navigator.vibrate([200]);
+                        op.innerHTML += `Out Of posture by Z<br/>`
+                        goodPosition=false;
+                        notifyIncorrectPosture();
+                    }
+                    if(goodPosition){
+                        clearInterval(incorrectPostureTimer);
+                        incorrectPostureTimer=null;
                     }
 
                 }
                 else {
-                    axe = event.alpha;
+                    clearInterval(incorrectPostureTimer)
+                    incorrectPostureTimer=null;
+                    axe = Math.round(event.alpha);
                     if (xCheckbox.checked) {
                         xDom.innerHTML = `X ${axe}`;
                     } else {
                         xDom.innerHTML = ''
                     }
-                    ye = event.beta;
+                    ye = Math.round(event.beta);
                     if (yCheckbox.checked) {
                         yDom.innerHTML = `Y ${ye}`;
                     }
                     else {
                         yDom.innerHTML = ''
                     }
-                    zee = event.gamma;
+                    zee = Math.round(event.gamma);
                     if (zCheckbox.checked) {
                         zDom.innerHTML = `Z ${zee}`;
                     } else {
@@ -65,6 +76,19 @@ window.addEventListener('load', _ => {
         }
 
     })
+
+    let incorrectPostureTimer = null;
+
+    function notifyIncorrectPosture() {
+        if(incorrectPostureTimer==null){
+            window.navigator.vibrate([200]);
+            incorrectPostureTimer = setInterval(_ => {
+                window.navigator.vibrate([200]);
+            }, 2000)
+        }
+
+
+    }
 
     document.querySelector('#lockBtn').addEventListener('click', _ => {
         lockedAxis.x = axe;
