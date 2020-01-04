@@ -3,10 +3,10 @@ let version = 1.0;
 let cacheName = "MyCacheV" + version;
 
 let filesToCache = [
-	"/",
-	"/index.html",
-	"js/main.js",
-	"css/main.css"
+	"https://prnysarker.github.io/posturefixz/",
+	"https://prnysarker.github.io/posturefixz/index.html",
+	"https://prnysarker.github.io/posturefixz/index.html/js/main.js",
+	"https://prnysarker.github.io/posturefixz/index.html/css/main.css"
 ];
 
 self.addEventListener("install", function(event) {
