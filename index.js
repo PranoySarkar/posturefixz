@@ -44,9 +44,11 @@ window.addEventListener('load', _ => {
                     }
                     if(goodPosition){
                         op.innerHTML += `Good Possition detected`
-                        window.navigator.vibrate([100,100,100]);
-                        clearInterval(incorrectPostureTimer);
-                        incorrectPostureTimer=null;
+                        if(incorrectPostureTimer!=null){
+                            window.navigator.vibrate([100]);
+                            clearInterval(incorrectPostureTimer);
+                            incorrectPostureTimer=null;
+                        }
                     }
 
                 }
