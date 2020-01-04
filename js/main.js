@@ -1,4 +1,5 @@
 window.addEventListener('load', _ => {
+    Settings.initIfNot();
 
     let axe = 0;
     let ye = 0;
@@ -12,6 +13,9 @@ window.addEventListener('load', _ => {
     let zDom = document.querySelector('#z');
     let op = document.querySelector('#op');
     let delta = document.querySelector('#delta');
+    delta.value = Number.parseInt(Settings.getSensitivity());
+    delta.addEventListener('change',updateSensitivity)
+    delta.addEventListener('keyup',updateSensitivity)
     let xCheckbox = document.querySelector('#xCheckbox');
     let yCheckbox = document.querySelector('#yCheckbox');
     let zCheckbox = document.querySelector('#zCheckbox');
@@ -47,7 +51,7 @@ window.addEventListener('load', _ => {
                         if(incorrectPostureTimer!=null){
                             clearInterval(incorrectPostureTimer);
                             incorrectPostureTimer=null;
-                            window.navigator.vibrate([100,50,50]);
+                            window.navigator.vibrate([100,100,100]);
                         }
                     }
 
@@ -95,10 +99,20 @@ window.addEventListener('load', _ => {
 
     }
 
-    document.querySelector('#lockBtn').addEventListener('click', _ => {
+    document.querySelector('#lockBtn').addEventListener('click', event => {
         lockedAxis.x = axe;
         lockedAxis.y = ye;
         lockedAxis.z = zee;
         positionLocked = !positionLocked;
+        if(positionLocked){
+            window.navigator.vibrate([100,100,100]);
+            event.target.innerHTML="Stop";
+        }else{
+            event.target.innerHTML="Set Position";
+        }
     })
+
+    function updateSensitivity(){
+        Settings.setSensitivity(this.value)
+    }
 })

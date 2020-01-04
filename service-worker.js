@@ -7,6 +7,7 @@ let filesToCache = [
   "/posturefixz/manifest.json",
 	"/posturefixz/index.html",
 	"/posturefixz/js/main.js",
+	"/posturefixz/js/settings.js",
   "/posturefixz/css/main.css",
   "/posturefixz/assets/icons/icon.png"
 ];
