@@ -27,18 +27,18 @@ window.addEventListener('load', _ => {
                     let goodPosition = true;
                     op.innerHTML = '';
                     if (xCheckbox.checked && Math.abs(event.alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
-                        op.innerHTML = `Out Of posture by x<br/>`
+                        op.innerHTML = `Out Of posture by x ${Math.round(event.alpha)}<br/>`
                         goodPosition=false;
                         notifyIncorrectPosture();
 
                     }
                     if (yCheckbox.checked && Math.abs(event.beta - lockedAxis.y) > Number.parseFloat(delta.value)) {
-                        op.innerHTML += `Out Of posture by Y<br/>`
+                        op.innerHTML += `Out Of posture by Y ${Math.round(event.beta)}<br/>`
                         goodPosition=false;
                         notifyIncorrectPosture();
                     }
                     if (zCheckbox.checked && Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
-                        op.innerHTML += `Out Of posture by Z<br/>`
+                        op.innerHTML += `Out Of posture by Z ${Math.round(event.gamma)}<br/>`
                         goodPosition=false;
                         notifyIncorrectPosture();
                     }
