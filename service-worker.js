@@ -3,6 +3,7 @@ let version = 1.0;
 let cacheName = "MyCacheV" + version;
 
 let filesToCache = [
+  "/posturefixz/",
   "/posturefixz/manifest.json",
 	"/posturefixz/index.html",
 	"/posturefixz/js/main.js",
