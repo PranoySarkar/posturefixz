@@ -1,11 +1,11 @@
 {
-  "name": "my-new-pwa",
-  "short_name": "my-new-pwa",
+  "name": "Posture Fixz",
+  "short_name": "PostureFixz",
   "start_url": "/posturefixz/index.html",
   "display": "fullscreen",
   "orientation": "portrait",
   "background_color": "#fff",
-  "theme_color": "#000",
+  "theme_color": "#ba68c8",
   "icons": [
     {
       "src": "/posturefixz/assets/icons/icon.png",
