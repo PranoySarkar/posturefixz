@@ -58,7 +58,7 @@ window.addEventListener('load', _ => {
 
                 }
                 else {
-                    op.innerHTML += ``
+                    op.innerHTML = ``
                     clearInterval(incorrectPostureTimer)
                     incorrectPostureTimer = null;
                     axe = Math.round(event.alpha);
@@ -103,6 +103,7 @@ window.addEventListener('load', _ => {
     let detectPositionTimer = null;
     document.querySelector('#lockBtn').addEventListener('click', event => {
         if (positionLocked) {
+            clearInterval(detectPositionTimer);
             positionLocked = false;
             lockBtn.innerHTML = "Detect Position";
             window.navigator.vibrate([100, 100, 100]);
