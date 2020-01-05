@@ -36,13 +36,37 @@
                 <div class="output" id="z"></div>
                 <div class="output" id="op"></div>
             </div>
-        
+
             <div class="controllers">
-                <button id="lockBtn">Set Position</button>
-                <input type="number" max="20" min="2" id="delta" value="2">
-                x<input type="checkbox" checked=true id='xCheckbox'>
-                y<input type="checkbox" checked=true id='yCheckbox'>
-                z<input type="checkbox" checked=true id='zCheckbox'>
+                <button id="lockBtn">Detect Position</button>
+                <div class="sensitivityGroup">
+                    <label for="delta">Sensitivity</label>
+                    <select name="" id="delta">
+                        <option value="15">Low 1</option>
+                        <option value="14">Low 2</option>
+                        <option value="13">Low 3</option>
+                        <option value="12">Low 4</option>
+                        <option value="11">Low 5</option>
+                        <option value="10">Medium 6</option>
+                        <option value="9">Medium 7</option>
+                        <option value="8">Medium 8</option>
+                        <option value="7">Medium 9</option>
+                        <option value="6">Medium 10</option>
+                        <option value="5">High 11</option>
+                        <option value="4">High 12</option>
+                        <option value="3">High 13</option>
+                        <option value="2">Extreme 14</option>
+                        <option value="1">Extreme 15</option>
+                    </select>
+
+                </div>
+
+                <div>
+                    x<input type="checkbox" checked=true id='xCheckbox'>
+                   <label for="yCheckbox">Portrait</label>  <input type="checkbox" checked=true id='yCheckbox'>
+                   <label for="zCheckbox">Landscape</label>  <input type="checkbox" checked=true id='zCheckbox'>
+                </div>
+
             </div>
             v78
         </div>

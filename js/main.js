@@ -12,10 +12,11 @@ window.addEventListener('load', _ => {
     let yDom = document.querySelector('#y');
     let zDom = document.querySelector('#z');
     let op = document.querySelector('#op');
+    let lockBtn = document.querySelector('#lockBtn');
     let delta = document.querySelector('#delta');
     delta.value = Number.parseInt(Settings.getSensitivity());
-    delta.addEventListener('change',updateSensitivity)
-    delta.addEventListener('keyup',updateSensitivity)
+    delta.addEventListener('change', updateSensitivity)
+    delta.addEventListener('keyup', updateSensitivity)
     let xCheckbox = document.querySelector('#xCheckbox');
     let yCheckbox = document.querySelector('#yCheckbox');
     let zCheckbox = document.querySelector('#zCheckbox');
@@ -32,26 +33,26 @@ window.addEventListener('load', _ => {
                     op.innerHTML = '';
                     if (xCheckbox.checked && Math.abs(event.alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
                         op.innerHTML = `Out Of posture by x ${Math.round(event.alpha)}<br/>`
-                        goodPosition=false;
+                        goodPosition = false;
                         notifyIncorrectPosture();
 
                     }
                     if (yCheckbox.checked && Math.abs(event.beta - lockedAxis.y) > Number.parseFloat(delta.value)) {
                         op.innerHTML += `Out Of posture by Y ${Math.round(event.beta)}<br/>`
-                        goodPosition=false;
+                        goodPosition = false;
                         notifyIncorrectPosture();
                     }
                     if (zCheckbox.checked && Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
                         op.innerHTML += `Out Of posture by Z ${Math.round(event.gamma)}<br/>`
-                        goodPosition=false;
+                        goodPosition = false;
                         notifyIncorrectPosture();
                     }
-                    if(goodPosition){
+                    if (goodPosition) {
                         op.innerHTML += `Good Possition detected`
-                        if(incorrectPostureTimer!=null){
+                        if (incorrectPostureTimer != null) {
                             clearInterval(incorrectPostureTimer);
-                            incorrectPostureTimer=null;
-                            window.navigator.vibrate([100,100,100]);
+                            incorrectPostureTimer = null;
+                            window.navigator.vibrate([100, 100, 100]);
                         }
                     }
 
@@ -59,7 +60,7 @@ window.addEventListener('load', _ => {
                 else {
                     op.innerHTML += ``
                     clearInterval(incorrectPostureTimer)
-                    incorrectPostureTimer=null;
+                    incorrectPostureTimer = null;
                     axe = Math.round(event.alpha);
                     if (xCheckbox.checked) {
                         xDom.innerHTML = `X ${axe}`;
@@ -89,7 +90,7 @@ window.addEventListener('load', _ => {
     let incorrectPostureTimer = null;
 
     function notifyIncorrectPosture() {
-        if(incorrectPostureTimer==null){
+        if (incorrectPostureTimer == null) {
             window.navigator.vibrate([200]);
             incorrectPostureTimer = setInterval(_ => {
                 window.navigator.vibrate([200]);
@@ -99,20 +100,51 @@ window.addEventListener('load', _ => {
 
     }
 
+    let detectPositionTimer = null;
     document.querySelector('#lockBtn').addEventListener('click', event => {
+        if (positionLocked) {
+            positionLocked = false;
+            lockBtn.innerHTML = "Detect Position";
+            window.navigator.vibrate([100, 100, 100]);
+        } else {
+            detectPositionTimer = setInterval(detectPosition, 100)
+        }
+       
+    })
+
+    function lockPosition() {
         lockedAxis.x = axe;
         lockedAxis.y = ye;
         lockedAxis.z = zee;
-        positionLocked = !positionLocked;
-        if(positionLocked){
-            window.navigator.vibrate([100,100,100]);
-            event.target.innerHTML="Stop";
-        }else{
-            event.target.innerHTML="Set Position";
-        }
-    })
+        positionLocked = true
+        window.navigator.vibrate([100, 100, 100]);
+        lockBtn.innerHTML = "Stop";
 
-    function updateSensitivity(){
+    }
+
+    function updateSensitivity() {
         Settings.setSensitivity(this.value)
     }
+
+    let positionDetectionConfidence = 0;
+    let temp = {
+        x: -3535
+    }
+    function detectPosition() {
+        if (Math.abs(temp.x - axe) < 2) {
+            positionDetectionConfidence++;
+        } else {
+            positionDetectionConfidence = 0;
+            console.log('Confidence reset')
+            temp.x = axe
+        }
+        if (positionDetectionConfidence > 5) {
+            positionDetectionConfidence = 0;
+            clearInterval(detectPositionTimer);
+            console.log('Good position detected')
+            lockPosition();
+        }
+    }
+
+
 })
