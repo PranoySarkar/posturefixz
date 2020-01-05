@@ -62,13 +62,31 @@
                 </div>
 
                 <div>
-                    x<input type="checkbox" checked=true id='xCheckbox'>
-                   <label for="yCheckbox">Portrait</label>  <input type="checkbox" checked=true id='yCheckbox'>
-                   <label for="zCheckbox">Landscape</label>  <input type="checkbox" checked=true id='zCheckbox'>
-                </div>
+                    <div class="orientation">
+                        <div class="radioGroup">
+                            <label for="yAxis">Portrait</label>
+                            <input checked="true" type="radio" name="axis" id="yAxis">
+                        </div>
+                        <div class="radioGroup">
+                            <label for="zAxis">Landscape</label>
+                            <input type="radio" name="axis" id="zAxis">
+                        </div>
+                        <div class="radioGroup">
+                            <label for="allAxis">All</label>
+                            <input type="radio" name="axis" id="allAxis">
+                        </div>
+                    </div>
+                   </div>
 
             </div>
-            v79
+            <div class="hiddenVideo">
+                <video  autoplay loop controls muted>
+                    <source src="assets/video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+            </div>
+            
+            v80
         </div>
     </div>
 </body>

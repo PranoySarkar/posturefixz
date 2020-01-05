@@ -17,9 +17,9 @@ window.addEventListener('load', _ => {
     delta.value = Number.parseInt(Settings.getSensitivity());
     delta.addEventListener('change', updateSensitivity)
     delta.addEventListener('keyup', updateSensitivity)
-    let xCheckbox = document.querySelector('#xCheckbox');
-    let yCheckbox = document.querySelector('#yCheckbox');
-    let zCheckbox = document.querySelector('#zCheckbox');
+    let allAxis = document.querySelector('#allAxis');
+    let portraitRadioY = document.querySelector('#yAxis');
+    let landscapeRadioZ = document.querySelector('#zAxis');
 
     let throttled = false;
     window.addEventListener('deviceorientation', (event) => {
@@ -27,22 +27,21 @@ window.addEventListener('load', _ => {
         if (!throttled) {
             throttled = true;
             setTimeout((event) => {
-                console.log(new Date().getTime())
                 if (positionLocked) {
                     let goodPosition = true;
                     op.innerHTML = '';
-                    if (xCheckbox.checked && Math.abs(event.alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
+                    if (allAxis.checked && Math.abs(event.alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
                         op.innerHTML = `Out Of posture by x ${Math.round(event.alpha)}<br/>`
                         goodPosition = false;
                         notifyIncorrectPosture();
 
                     }
-                    if (yCheckbox.checked && Math.abs(event.beta - lockedAxis.y) > Number.parseFloat(delta.value)) {
+                    if ((allAxis.checked || portraitRadioY.checked) && Math.abs(event.beta - lockedAxis.y) > Number.parseFloat(delta.value)) {
                         op.innerHTML += `Out Of posture by Y ${Math.round(event.beta)}<br/>`
                         goodPosition = false;
                         notifyIncorrectPosture();
                     }
-                    if (zCheckbox.checked && Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
+                    if ((allAxis.checked || landscapeRadioZ.checked )&& Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
                         op.innerHTML += `Out Of posture by Z ${Math.round(event.gamma)}<br/>`
                         goodPosition = false;
                         notifyIncorrectPosture();
@@ -62,20 +61,20 @@ window.addEventListener('load', _ => {
                     clearInterval(incorrectPostureTimer)
                     incorrectPostureTimer = null;
                     axe = Math.round(event.alpha);
-                    if (xCheckbox.checked) {
+                    if (allAxis.checked) {
                         xDom.innerHTML = `X ${axe}`;
                     } else {
                         xDom.innerHTML = ''
                     }
                     ye = Math.round(event.beta);
-                    if (yCheckbox.checked) {
+                    if (allAxis.checked|| portraitRadioY.checked) {
                         yDom.innerHTML = `Y ${ye}`;
                     }
                     else {
                         yDom.innerHTML = ''
                     }
                     zee = Math.round(event.gamma);
-                    if (zCheckbox.checked) {
+                    if (allAxis.checked || landscapeRadioZ.checked) {
                         zDom.innerHTML = `Z ${zee}`;
                     } else {
                         zDom.innerHTML = ''
@@ -108,6 +107,7 @@ window.addEventListener('load', _ => {
             lockBtn.innerHTML = "Detect Position";
             window.navigator.vibrate([100, 100, 100]);
         } else {
+            lockBtn.innerHTML = "Detecting Position";
             detectPositionTimer = setInterval(detectPosition, 100)
         }
        
@@ -139,7 +139,7 @@ window.addEventListener('load', _ => {
             console.log('Confidence reset')
             temp.x = axe
         }
-        if (positionDetectionConfidence > 5) {
+        if (positionDetectionConfidence > 10) {
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
             console.log('Good position detected')
