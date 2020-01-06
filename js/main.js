@@ -21,7 +21,11 @@ window.addEventListener('load', _ => {
     let portraitRadioY = document.querySelector('#yAxis');
     let landscapeRadioZ = document.querySelector('#zAxis');
     let positionDetectedAudio= document.querySelector('#positionDetectedAudio');
+    fetch('./assets/audio/positive.wav')
     let incorrectPositionAudio= document.querySelector('#incorrectPositionAudio');
+    fetch('./assets/audio/negative_2.wav')
+    let repositionDetectedAudio= document.querySelector('#repositionDetectedAudio');
+    fetch('./assets/audio/reposition.wav')
 
     let throttled = false;
     window.addEventListener('deviceorientation', (event) => {
@@ -53,6 +57,7 @@ window.addEventListener('load', _ => {
                         if (incorrectPostureTimer != null) {
                             clearInterval(incorrectPostureTimer);
                             incorrectPostureTimer = null;
+                            repositionDetectedAudio.play();
                             window.navigator.vibrate([100, 100, 100]);
                         }
                     }
