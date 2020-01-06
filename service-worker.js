@@ -9,7 +9,10 @@ let filesToCache = [
 	"/posturefixz/js/main.js",
 	"/posturefixz/js/settings.js",
   "/posturefixz/css/main.css",
-  "/posturefixz/assets/icons/icon.png"
+  "/posturefixz/assets/icons/icon.png",
+  "/posturefixz/assets/video.mp4",
+  "/posturefixz/assets/audio/positive.wav",
+  "/posturefixz/audio/negative_2.wav"
 ];
 
 self.addEventListener("install", function(event) {

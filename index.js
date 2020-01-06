@@ -15,6 +15,7 @@ window.addEventListener('load', _ => {
     let xCheckbox = document.querySelector('#xCheckbox');
     let yCheckbox = document.querySelector('#yCheckbox');
     let zCheckbox = document.querySelector('#zCheckbox');
+ 
 
     let throttled = false;
     window.addEventListener('deviceorientation', (event) => {

@@ -20,6 +20,8 @@ window.addEventListener('load', _ => {
     let allAxis = document.querySelector('#allAxis');
     let portraitRadioY = document.querySelector('#yAxis');
     let landscapeRadioZ = document.querySelector('#zAxis');
+    let positionDetectedAudio= document.querySelector('#positionDetectedAudio');
+    let incorrectPositionAudio= document.querySelector('#incorrectPositionAudio');
 
     let throttled = false;
     window.addEventListener('deviceorientation', (event) => {
@@ -91,8 +93,10 @@ window.addEventListener('load', _ => {
     function notifyIncorrectPosture() {
         if (incorrectPostureTimer == null) {
             window.navigator.vibrate([200]);
+            incorrectPositionAudio.play();
             incorrectPostureTimer = setInterval(_ => {
                 window.navigator.vibrate([200]);
+                incorrectPositionAudio.play();
             }, 2000)
         }
 
@@ -118,7 +122,9 @@ window.addEventListener('load', _ => {
         lockedAxis.y = ye;
         lockedAxis.z = zee;
         positionLocked = true
+        positionDetectedAudio.play();
         window.navigator.vibrate([100, 100, 100]);
+
         lockBtn.innerHTML = "Stop";
 
     }
@@ -139,7 +145,7 @@ window.addEventListener('load', _ => {
             console.log('Confidence reset')
             temp.x = axe
         }
-        if (positionDetectionConfidence > 10) {
+        if (positionDetectionConfidence > 15) {
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
             console.log('Good position detected')
