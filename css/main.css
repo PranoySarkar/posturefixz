@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    color: #636363;
 }
 
 .container {
@@ -61,10 +62,44 @@ header img {
     border-radius: 2px;
     min-width: 250px;
     min-height: 125px;
+    font-size: .5rem;
+}
+
+.board {
+    border: 1px solid #e9e9e9;
+    padding: 10px;
+    height: 140px;
+    box-shadow: 0 0 10px 1px #c8c8c840;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+.currentScore {
+    /* background: aliceblue; */
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.currentScore .data {
+    /* background: antiquewhite; */
+    padding: 10px;
+    /* height: 100%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    color: #9C27B0;
+    font-weight: 700;
+}
+
+.maxScore .data {
+    color: #D32F2F;
+    font-size: 1.5rem;
 }
 
 .controllers {
-    padding: 10px;
+    padding: 20px 10px 10px 10px;
     justify-content: center;
     margin-top: 10px;
     border-radius: 2px;
@@ -88,10 +123,24 @@ header img {
     outline: none;
     cursor: pointer;
     transition: all .2s;
+    -webkit-tap-highlight-color: #FFF0;
 }
 .controllers button:active {
     box-shadow: 0 0 3px 0px #df27ff7a;
     border: 0px solid #a0cff4;
+}
+
+.version {
+    /* background: white; */
+    position: absolute;
+    bottom: 0;
+    /* width: 99%; */
+    left: 0;
+    right: 0;
+    padding: 0 5px;
+    border-top: 1px solid #eaeaea;
+    text-align: right;
+    color: #a2a2a2;
 }
 
 div#op {

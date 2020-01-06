@@ -20,11 +20,11 @@ window.addEventListener('load', _ => {
     let allAxis = document.querySelector('#allAxis');
     let portraitRadioY = document.querySelector('#yAxis');
     let landscapeRadioZ = document.querySelector('#zAxis');
-    let positionDetectedAudio= document.querySelector('#positionDetectedAudio');
+    let positionDetectedAudio = document.querySelector('#positionDetectedAudio');
     fetch('./assets/audio/positive.wav')
-    let incorrectPositionAudio= document.querySelector('#incorrectPositionAudio');
+    let incorrectPositionAudio = document.querySelector('#incorrectPositionAudio');
     fetch('./assets/audio/negative_2.wav')
-    let repositionDetectedAudio= document.querySelector('#repositionDetectedAudio');
+    let repositionDetectedAudio = document.querySelector('#repositionDetectedAudio');
     fetch('./assets/audio/reposition.wav')
 
     let throttled = false;
@@ -47,7 +47,7 @@ window.addEventListener('load', _ => {
                         goodPosition = false;
                         notifyIncorrectPosture();
                     }
-                    if ((allAxis.checked || landscapeRadioZ.checked )&& Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
+                    if ((allAxis.checked || landscapeRadioZ.checked) && Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
                         op.innerHTML += `Out Of posture by Z ${Math.round(event.gamma)}<br/>`
                         goodPosition = false;
                         notifyIncorrectPosture();
@@ -74,7 +74,7 @@ window.addEventListener('load', _ => {
                         xDom.innerHTML = ''
                     }
                     ye = Math.round(event.beta);
-                    if (allAxis.checked|| portraitRadioY.checked) {
+                    if (allAxis.checked || portraitRadioY.checked) {
                         yDom.innerHTML = `Y ${ye}`;
                     }
                     else {
@@ -110,16 +110,17 @@ window.addEventListener('load', _ => {
 
     let detectPositionTimer = null;
     document.querySelector('#lockBtn').addEventListener('click', event => {
-        if (positionLocked) {
+        if (positionLocked === 'IN_PROGRESS' || positionLocked == true) {
             clearInterval(detectPositionTimer);
             positionLocked = false;
             lockBtn.innerHTML = "Detect Position";
             window.navigator.vibrate([100, 100, 100]);
         } else {
+            positionLocked = 'IN_PROGRESS'
             lockBtn.innerHTML = "Detecting Position";
             detectPositionTimer = setInterval(detectPosition, 100)
         }
-       
+
     })
 
     function lockPosition() {
