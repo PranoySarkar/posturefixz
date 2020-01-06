@@ -28,19 +28,19 @@
 
 <body>
     <div class="container">
-        <header>Posture Fixz</header>
+        <header>
+            Posture Fixz
+        </header>
         <div class="body">
-            <div class="stats">
-                <div class="output" id="x"></div>
-                <div class="output" id="y"></div>
-                <div class="output" id="z"></div>
-                <div class="output" id="op"></div>
-            </div>
+         
 
             <div class="controllers">
-                <button id="lockBtn">Detect Position</button>
+                <div class="center">
+                    <button id="lockBtn">Detect Position</button>
+                </div>
+               
                 <div class="sensitivityGroup">
-                    <label for="delta">Sensitivity</label>
+                    <label for="delta">Level</label>
                     <select name="" id="delta">
                         <option value="15">Low 1</option>
                         <option value="14">Low 2</option>
@@ -79,7 +79,12 @@
                 </div>
 
             </div>
-
+            <div class="stats">
+                <div class="output" id="x"></div>
+                <div class="output" id="y"></div>
+                <div class="output" id="z"></div>
+                <div class="output" id="op"></div>
+            </div>
             <div class="hiddenElements">
                 <audio  preload="auto" controls id="positionDetectedAudio">
                     <source src="./assets/audio/positive.wav">

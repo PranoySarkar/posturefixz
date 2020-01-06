@@ -4,23 +4,59 @@ body {
 
 .container {
     height: 100vh;
-    width: 100vw;
+    max-width: 600px;
+    margin: auto;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
 header {
-    padding: 10px;
-    background: #ba68c8;
+    background-image: linear-gradient(45deg, #9C27B0, #fd7d7d);
     color: #FFF;
     font-size: 2rem;
-    letter-spacing: 2px;
+    letter-spacing: 5px;
+    box-shadow: 0 0 3px 0px #acacac;
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    padding-left: 10px;
+    position: relative;
+    margin-bottom: 15px;
 }
+
+header::before {
+    contain: "d";
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-image: linear-gradient(45deg, #FCE4EC, #FFEB3B);
+    position: absolute;
+    top: 86%;
+    left: 0px;
+    width: 100%;
+    height: 8px;
+}
+
+header img {
+    width: 35px;
+    display: inline;
+    background: #FFCDD2;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 7px;
+}
+
 .body {
     padding: 10px;
 }
 
 .stats {
-    border: 1px solid #c5c5c5;
+   
     padding: 5px;
     border-radius: 2px;
     min-width: 250px;
@@ -40,7 +76,22 @@ header {
 
 .controllers button {
     padding: 10px;
-    width: 135px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #a0cff4;
+    box-shadow: 0 0 15px 0px #df27ff7a;
+    background: white;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #5d5d5d;
+    outline: none;
+    cursor: pointer;
+    transition: all .2s;
+}
+.controllers button:active {
+    box-shadow: 0 0 3px 0px #df27ff7a;
+    border: 0px solid #a0cff4;
 }
 
 div#op {
@@ -48,7 +99,7 @@ div#op {
 }
 
 .sensitivityGroup {
-    border: 1px solid #d4d1d1;
+   
     padding: 10px 20%;
     display: flex;
     flex-direction: column;
@@ -64,7 +115,7 @@ div#op {
 }
 
 .orientation {
-    border: 1px solid #d8d1d1;
+    
     padding: 10px 2px;
     display: flex;
     justify-content: space-around;
@@ -72,7 +123,8 @@ div#op {
 
 .radioGroup {
     border: 1px solid #e9e9e9;
-    padding: 5px 5px;
+    padding: 5px 10px 5px 2px;
+    min-width: 70px;
     border-radius: 2px;
     display: flex;
     justify-content: center;
