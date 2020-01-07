@@ -30,7 +30,7 @@ window.addEventListener('load', _ => {
     fetch('./assets/audio/reposition.wav')
     const currentScoreValue = document.querySelector('#currentScoreValue')
     const maxScoreValue= document.querySelector('#maxScoreValue');
-    maxScoreValue.innerHTML=maxScore;
+    maxScoreValue.innerHTML=Math.floor(maxScore);
     const indicator= document.querySelector('#indicator');
 
     let throttled = false;
@@ -66,14 +66,18 @@ window.addEventListener('load', _ => {
                             repositionDetectedAudio.play();
                             window.navigator.vibrate([100, 100, 100]);
                         }
-                        currentScore += .3;
-                        indicator.classList.add('indicator-goodPosture')
-                        indicator.classList.remove('indicator-badPosture')
-                    } else {
+                        if(positionLocked===true){
+                            currentScore += .3;
+                            indicator.classList.add('indicator-goodPosture')
+                            indicator.classList.remove('indicator-badPosture')
+                        }
 
-                        currentScore = currentScore > .6 ? currentScore - .6 : 0;
+                    } else {
+                        if(positionLocked===true){
+                        currentScore = currentScore > .15 ? currentScore - .15 : 0;
                         indicator.classList.add('indicator-badPosture')
                         indicator.classList.remove('indicator-goodPosture')
+                        }
                     }
                     if(currentScore > maxScore){
                         maxScore=currentScore;
@@ -169,7 +173,7 @@ window.addEventListener('load', _ => {
         x: -3535
     }
     function detectPosition() {
-        if (Math.abs(temp.x - axe) < 3) {
+        if (Math.abs(temp.x - axe) < 1) {
             positionDetectionConfidence++;
          
         } else {
