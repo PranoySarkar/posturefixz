@@ -71,7 +71,7 @@ window.addEventListener('load', _ => {
                         indicator.classList.remove('indicator-badPosture')
                     } else {
 
-                        currentScore = currentScore > 0 ? currentScore - .6 : 0;
+                        currentScore = currentScore > .6 ? currentScore - .6 : 0;
                         indicator.classList.add('indicator-badPosture')
                         indicator.classList.remove('indicator-goodPosture')
                     }
