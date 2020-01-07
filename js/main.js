@@ -65,17 +65,17 @@ window.addEventListener('load', _ => {
                             repositionDetectedAudio.play();
                             window.navigator.vibrate([100, 100, 100]);
                         }
-                        currentScore += 2;
+                        currentScore += .3;
                     } else {
 
-                        currentScore = currentScore > 0 ? currentScore - 1 : 0;
+                        currentScore = currentScore > 0 ? currentScore - .6 : 0;
                     }
                     if(currentScore > maxScore){
                         maxScore=currentScore;
                         Settings.setMaxScore(maxScore);
-                        maxScoreValue.innerHTML=currentScore;
+                        maxScoreValue.innerHTML=Math.floor(currentScore);
                     }
-                    currentScoreValue.innerHTML=currentScore;
+                    currentScoreValue.innerHTML=Math.floor(currentScore);
 
                 }
                 else {
