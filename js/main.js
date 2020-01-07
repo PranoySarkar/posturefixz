@@ -146,7 +146,7 @@ window.addEventListener('load', _ => {
             positionLocked = 'IN_PROGRESS'
             lockBtn.innerHTML = "Detecting Position";
             indicator.classList.add('indicator-searching')
-            detectPositionTimer = setInterval(detectPosition, 100)
+            detectPositionTimer = setInterval(detectPosition, 200)
         }
 
     })
