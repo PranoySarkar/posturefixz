@@ -39,7 +39,7 @@ window.addEventListener('load', _ => {
         if (!throttled) {
             throttled = true;
             setTimeout((event) => {
-                if (positionLocked) {
+                if (positionLocked===true) {
                     let goodPosition = true;
                     op.innerHTML = '';
                     if (allAxis.checked && Math.abs(event.alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
@@ -146,7 +146,7 @@ window.addEventListener('load', _ => {
             positionLocked = 'IN_PROGRESS'
             lockBtn.innerHTML = "Detecting Position";
             indicator.classList.add('indicator-searching')
-            detectPositionTimer = setInterval(detectPosition, 200)
+            detectPositionTimer = setInterval(detectPosition, 100)
         }
 
     })
