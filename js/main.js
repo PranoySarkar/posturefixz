@@ -145,13 +145,15 @@ window.addEventListener('load', _ => {
             indicator.classList.remove('indicator-goodPosture')
             indicator.classList.remove('indicator-badPosture')
             window.navigator.vibrate([100, 100, 100]);
-            noSleep.enable();
+            noSleep.disable();
+           
         } else {
             positionLocked = 'IN_PROGRESS'
             lockBtn.innerHTML = "Detecting Position";
             indicator.classList.add('indicator-searching')
             detectPositionTimer = setInterval(detectPosition, 100);
-            noSleep.disable();
+           
+            noSleep.enable();
             
         }
 
