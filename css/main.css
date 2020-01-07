@@ -223,7 +223,7 @@ div#op {
     overflow: hidden;
     display: none;
 }
-
 video {
     height: 100%;
+    width: 200px;
 }

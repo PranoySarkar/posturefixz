@@ -132,8 +132,11 @@ window.addEventListener('load', _ => {
 
     }
 
+    const noSleep=  new NoSleep();
     let detectPositionTimer = null;
     document.querySelector('#lockBtn').addEventListener('click', event => {
+        
+
         if (positionLocked === 'IN_PROGRESS' || positionLocked == true) {
             clearInterval(detectPositionTimer);
             positionLocked = false;
@@ -142,11 +145,14 @@ window.addEventListener('load', _ => {
             indicator.classList.remove('indicator-goodPosture')
             indicator.classList.remove('indicator-badPosture')
             window.navigator.vibrate([100, 100, 100]);
+            noSleep.enable();
         } else {
             positionLocked = 'IN_PROGRESS'
             lockBtn.innerHTML = "Detecting Position";
             indicator.classList.add('indicator-searching')
-            detectPositionTimer = setInterval(detectPosition, 100)
+            detectPositionTimer = setInterval(detectPosition, 100);
+            noSleep.disable();
+            
         }
 
     })

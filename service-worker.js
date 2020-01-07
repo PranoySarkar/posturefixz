@@ -1,4 +1,4 @@
-let version = 1.1;
+let version = 1.2;
 
 let cacheName = "posturefixz" + version;
 
@@ -7,9 +7,9 @@ let filesToCache = [
 	"/posturefixz/index.html",
 	"/posturefixz/js/main.js",
 	"/posturefixz/js/settings.js",
+	"/posturefixz/js/NoSleep.min.js",
   "/posturefixz/css/main.css",
   "/posturefixz/assets/icons/icon.png",
-  "/posturefixz/assets/video.mp4",
   "/posturefixz/assets/audio/positive.wav",
   "/posturefixz/assets/audio/negative_2.wav",
   "/posturefixz/assets/audio/reposition.wav"
