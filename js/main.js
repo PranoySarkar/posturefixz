@@ -1,5 +1,7 @@
 window.addEventListener('load', _ => {
     Settings.initIfNot();
+    let currentScore = 0;
+    let maxScore = Settings.getMaxScore();
 
     let axe = 0;
     let ye = 0;
@@ -26,6 +28,9 @@ window.addEventListener('load', _ => {
     fetch('./assets/audio/negative_2.wav')
     let repositionDetectedAudio = document.querySelector('#repositionDetectedAudio');
     fetch('./assets/audio/reposition.wav')
+    const currentScoreValue = document.querySelector('#currentScoreValue')
+    const maxScoreValue= document.querySelector('#maxScoreValue');
+    maxScoreValue.innerHTML=maxScore;
 
     let throttled = false;
     window.addEventListener('deviceorientation', (event) => {
@@ -60,7 +65,17 @@ window.addEventListener('load', _ => {
                             repositionDetectedAudio.play();
                             window.navigator.vibrate([100, 100, 100]);
                         }
+                        currentScore += 2;
+                    } else {
+
+                        currentScore = currentScore > 0 ? currentScore - 1 : 0;
                     }
+                    if(currentScore > maxScore){
+                        maxScore=currentScore;
+                        Settings.setMaxScore(maxScore);
+                        maxScoreValue.innerHTML=currentScore;
+                    }
+                    currentScoreValue.innerHTML=currentScore;
 
                 }
                 else {
@@ -113,7 +128,7 @@ window.addEventListener('load', _ => {
         if (positionLocked === 'IN_PROGRESS' || positionLocked == true) {
             clearInterval(detectPositionTimer);
             positionLocked = false;
-            lockBtn.innerHTML = "Detect Position";
+            lockBtn.innerHTML = "Start";
             window.navigator.vibrate([100, 100, 100]);
         } else {
             positionLocked = 'IN_PROGRESS'
@@ -129,6 +144,7 @@ window.addEventListener('load', _ => {
         lockedAxis.z = zee;
         positionLocked = true
         positionDetectedAudio.play();
+        currentScore = 0;
         window.navigator.vibrate([100, 100, 100]);
 
         lockBtn.innerHTML = "Stop";
@@ -144,14 +160,20 @@ window.addEventListener('load', _ => {
         x: -3535
     }
     function detectPosition() {
-        if (Math.abs(temp.x - axe) < 2) {
+        if (Math.abs(temp.x - axe) < 3) {
             positionDetectionConfidence++;
+         
         } else {
             positionDetectionConfidence = 0;
             console.log('Confidence reset')
             temp.x = axe
         }
-        if (positionDetectionConfidence > 15) {
+        if(getComputedStyle(lockBtn).borderWidth=='3px'){
+            lockBtn.style.borderWidth='4px'
+        }else{
+            lockBtn.style.borderWidth='3px'
+        }
+        if (positionDetectionConfidence > 10) {
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
             console.log('Good position detected')
