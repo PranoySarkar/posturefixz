@@ -31,6 +31,7 @@ window.addEventListener('load', _ => {
     const currentScoreValue = document.querySelector('#currentScoreValue')
     const maxScoreValue= document.querySelector('#maxScoreValue');
     maxScoreValue.innerHTML=maxScore;
+    const indicator= document.querySelector('#indicator');
 
     let throttled = false;
     window.addEventListener('deviceorientation', (event) => {
@@ -66,9 +67,13 @@ window.addEventListener('load', _ => {
                             window.navigator.vibrate([100, 100, 100]);
                         }
                         currentScore += .3;
+                        indicator.classList.add('indicator-goodPosture')
+                        indicator.classList.remove('indicator-badPosture')
                     } else {
 
                         currentScore = currentScore > 0 ? currentScore - .6 : 0;
+                        indicator.classList.add('indicator-badPosture')
+                        indicator.classList.remove('indicator-goodPosture')
                     }
                     if(currentScore > maxScore){
                         maxScore=currentScore;
@@ -129,10 +134,14 @@ window.addEventListener('load', _ => {
             clearInterval(detectPositionTimer);
             positionLocked = false;
             lockBtn.innerHTML = "Start";
+            indicator.classList.remove('indicator-searching')
+            indicator.classList.remove('indicator-goodPosture')
+            indicator.classList.remove('indicator-badPosture')
             window.navigator.vibrate([100, 100, 100]);
         } else {
             positionLocked = 'IN_PROGRESS'
             lockBtn.innerHTML = "Detecting Position";
+            indicator.classList.add('indicator-searching')
             detectPositionTimer = setInterval(detectPosition, 100)
         }
 
@@ -146,7 +155,7 @@ window.addEventListener('load', _ => {
         positionDetectedAudio.play();
         currentScore = 0;
         window.navigator.vibrate([100, 100, 100]);
-
+   
         lockBtn.innerHTML = "Stop";
 
     }

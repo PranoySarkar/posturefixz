@@ -74,7 +74,43 @@ header img {
     margin-bottom: 20px;
     display: grid;
     grid-template-columns: 3fr 1fr;
+    position: relative;
+    overflow: hidden;
 }
+
+#indicator {
+    
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: -80px;
+    left: -60px;
+    border-radius: 50%;
+    transition: all .2s;
+}
+
+#indicator.indicator-searching{
+    background-image: linear-gradient(45deg, blue, transparent);
+    width: 140px;
+    height: 140px;
+}
+
+#indicator.indicator-goodPosture{
+    background-image: linear-gradient(45deg, #47ff00, transparent);
+    width: 140px;
+    height: 140px;
+
+}
+
+
+#indicator.indicator-badPosture{
+    background-image: linear-gradient(45deg,  #ff0600, transparent);
+    width: 140px;
+    height: 140px;
+}
+
+
+
 .currentScore {
     /* background: aliceblue; */
     height: 100%;
@@ -95,7 +131,7 @@ header img {
 }
 
 .maxScore .data {
-    color: #D32F2F;
+    color: #7B1FA2;
     font-size: 1.5rem;
 }
 
