@@ -8,6 +8,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/posturefixz/assets/icons/icon.png">
     <link rel="icon" type="image/png" href="/posturefixz/assets/icons/icon.png" sizes="32x32">
     <link rel="icon" type="image/png" href="/posturefixz/assets/icons/icon.png" sizes="16x16">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <meta name="theme-color" content="#ba68c8">
     <link rel="manifest" href="manifest.json">
     <script type="text/javascript">
@@ -19,6 +20,7 @@
                 });
         }
     </script>
+    <script  defer src="./assets/audio/media.js" ></script>
     <script src="js/NoSleep.min.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/main.js"></script>
@@ -46,6 +48,9 @@
                         <label for="">Max Score</label>
                         <div class="data" id="maxScoreValue">0</div>
                     </div>
+                </div>
+                <div class="socialShares">
+                    <div ></div>
                 </div>
             </div>
             <div class="controllers">
@@ -100,15 +105,7 @@
                 <div class="output" id="op"></div>
             </div>
             <div class="hiddenElements">
-                <audio preload="auto" controls id="positionDetectedAudio">
-                    <source src="./assets/audio/positive.wav">
-                </audio>
-                <audio preload="auto" controls id="repositionDetectedAudio">
-                    <source src="./assets/audio/reposition.wav">
-                </audio>
-                <audio preload="auto" controls id="incorrectPositionAudio">
-                    <source src="./assets/audio/negative_2.wav">
-                </audio>
+
             </div>     
             <div class="version">v87</div>
 

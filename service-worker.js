@@ -1,4 +1,4 @@
-let version = 1.2;
+let version = 1.3;
 
 let cacheName = "posturefixz" + version;
 
@@ -10,9 +10,8 @@ let filesToCache = [
 	"/posturefixz/js/NoSleep.min.js",
   "/posturefixz/css/main.css",
   "/posturefixz/assets/icons/icon.png",
-  "/posturefixz/assets/audio/positive.wav",
-  "/posturefixz/assets/audio/negative_2.wav",
-  "/posturefixz/assets/audio/reposition.wav"
+  "/posturefixz/assets/audio/media.js",
+  'https://fonts.googleapis.com/css?family=Open+Sans&display=swap'
 ];
 
 self.addEventListener("install", function(event) {

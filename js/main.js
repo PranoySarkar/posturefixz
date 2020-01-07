@@ -22,16 +22,10 @@ window.addEventListener('load', _ => {
     let allAxis = document.querySelector('#allAxis');
     let portraitRadioY = document.querySelector('#yAxis');
     let landscapeRadioZ = document.querySelector('#zAxis');
-    let positionDetectedAudio = document.querySelector('#positionDetectedAudio');
-    fetch('./assets/audio/positive.wav')
-    let incorrectPositionAudio = document.querySelector('#incorrectPositionAudio');
-    fetch('./assets/audio/negative_2.wav')
-    let repositionDetectedAudio = document.querySelector('#repositionDetectedAudio');
-    fetch('./assets/audio/reposition.wav')
     const currentScoreValue = document.querySelector('#currentScoreValue')
-    const maxScoreValue= document.querySelector('#maxScoreValue');
-    maxScoreValue.innerHTML=Math.floor(maxScore);
-    const indicator= document.querySelector('#indicator');
+    const maxScoreValue = document.querySelector('#maxScoreValue');
+    maxScoreValue.innerHTML = Math.floor(maxScore);
+    const indicator = document.querySelector('#indicator');
 
     let throttled = false;
     window.addEventListener('deviceorientation', (event) => {
@@ -39,7 +33,7 @@ window.addEventListener('load', _ => {
         if (!throttled) {
             throttled = true;
             setTimeout((event) => {
-                if (positionLocked===true) {
+                if (positionLocked === true) {
                     let goodPosition = true;
                     op.innerHTML = '';
                     if (allAxis.checked && Math.abs(event.alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
@@ -63,28 +57,28 @@ window.addEventListener('load', _ => {
                         if (incorrectPostureTimer != null) {
                             clearInterval(incorrectPostureTimer);
                             incorrectPostureTimer = null;
-                            repositionDetectedAudio.play();
+                            repositionSound.play();
                             window.navigator.vibrate([100, 100, 100]);
                         }
-                        if(positionLocked===true){
+                        if (positionLocked === true) {
                             currentScore += .3;
                             indicator.classList.add('indicator-goodPosture')
                             indicator.classList.remove('indicator-badPosture')
                         }
 
                     } else {
-                        if(positionLocked===true){
-                        currentScore = currentScore > .15 ? currentScore - .15 : 0;
-                        indicator.classList.add('indicator-badPosture')
-                        indicator.classList.remove('indicator-goodPosture')
+                        if (positionLocked === true) {
+                            currentScore = currentScore > .15 ? currentScore - .15 : 0;
+                            indicator.classList.add('indicator-badPosture')
+                            indicator.classList.remove('indicator-goodPosture')
                         }
                     }
-                    if(currentScore > maxScore){
-                        maxScore=currentScore;
+                    if (currentScore > maxScore) {
+                        maxScore = currentScore;
                         Settings.setMaxScore(maxScore);
-                        maxScoreValue.innerHTML=Math.floor(currentScore);
+                        maxScoreValue.innerHTML = Math.floor(currentScore);
                     }
-                    currentScoreValue.innerHTML=Math.floor(currentScore);
+                    currentScoreValue.innerHTML = Math.floor(currentScore);
 
                 }
                 else {
@@ -122,20 +116,20 @@ window.addEventListener('load', _ => {
     function notifyIncorrectPosture() {
         if (incorrectPostureTimer == null) {
             window.navigator.vibrate([200]);
-            incorrectPositionAudio.play();
+            negativeSound.play();
             incorrectPostureTimer = setInterval(_ => {
                 window.navigator.vibrate([200]);
-                incorrectPositionAudio.play();
+                negativeSound.play();
             }, 2000)
         }
 
 
     }
 
-    const noSleep=  new NoSleep();
+    const noSleep = new NoSleep();
     let detectPositionTimer = null;
     document.querySelector('#lockBtn').addEventListener('click', event => {
-        
+
 
         if (positionLocked === 'IN_PROGRESS' || positionLocked == true) {
             clearInterval(detectPositionTimer);
@@ -146,15 +140,15 @@ window.addEventListener('load', _ => {
             indicator.classList.remove('indicator-badPosture')
             window.navigator.vibrate([100, 100, 100]);
             noSleep.disable();
-           
+
         } else {
             positionLocked = 'IN_PROGRESS'
             lockBtn.innerHTML = "Detecting Position";
             indicator.classList.add('indicator-searching')
             detectPositionTimer = setInterval(detectPosition, 100);
-           
+
             noSleep.enable();
-            
+
         }
 
     })
@@ -164,10 +158,10 @@ window.addEventListener('load', _ => {
         lockedAxis.y = ye;
         lockedAxis.z = zee;
         positionLocked = true
-        positionDetectedAudio.play();
+        possitiveSound.play();
         currentScore = 0;
         window.navigator.vibrate([100, 100, 100]);
-   
+
         lockBtn.innerHTML = "Stop";
 
     }
@@ -183,16 +177,16 @@ window.addEventListener('load', _ => {
     function detectPosition() {
         if (Math.abs(temp.x - axe) < 1) {
             positionDetectionConfidence++;
-         
+
         } else {
             positionDetectionConfidence = 0;
             console.log('Confidence reset')
             temp.x = axe
         }
-        if(getComputedStyle(lockBtn).borderWidth=='3px'){
-            lockBtn.style.borderWidth='4px'
-        }else{
-            lockBtn.style.borderWidth='3px'
+        if (getComputedStyle(lockBtn).borderWidth == '3px') {
+            lockBtn.style.borderWidth = '4px'
+        } else {
+            lockBtn.style.borderWidth = '3px'
         }
         if (positionDetectionConfidence > 10) {
             positionDetectionConfidence = 0;
