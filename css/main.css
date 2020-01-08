@@ -179,6 +179,9 @@ header img {
     width: 100%;
     cursor: pointer;
 }
+#twitterShare {
+    padding: 6px;
+}
 .twitterIcon {
     padding: 5px 4px 5px 6px;
     /* padding-left: 7px; */
