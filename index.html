@@ -15,8 +15,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/posturefixz/assets/icons/icon.png">
     <link rel="icon" type="image/png" href="/posturefixz/assets/icons/icon.png" sizes="32x32">
     <link rel="icon" type="image/png" href="/posturefixz/assets/icons/icon.png" sizes="16x16">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <meta name="theme-color" content="#ba68c8">
+    <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> -->
+    <meta name="theme-color" content="#FFFFFF">
     <link rel="manifest" href="manifest.json">
     <script type="text/javascript">
         if ('serviceWorker' in navigator) {
@@ -39,7 +39,7 @@
 <body>
     <div class="container">
         <header>
-            Posture Fixz
+            <h1>Posture Fixz </h1> <a href="#help"></a>
         </header>
         <div class="body">
             <div class="board">
@@ -88,6 +88,7 @@
             </div>
             <div class="controllers">
                 <div class="center">
+                    <a class="linkIcon" href="#appHelp">Help</a>
                     <button id="lockBtn">Start</button>
                 </div>
 
@@ -131,6 +132,37 @@
                 </div>
 
             </div>
+            <div id="help">
+                <h2>How to Sit properly? </h2>
+                <div class="center">
+                    <iframe  height="100%" src="https://www.youtube-nocookie.com/embed/xzV1Hej61CY?start=7" frameborder="0" allow="encrypted-media; " allowfullscreen></iframe>
+                </div>
+                <p>This is Dr Alan Hedge from Cornell University he is an Ergonomics professor (Ergonomics: relating to or designed for efficiency and comfort in the working environment). 
+                     <a href="https://www.human.cornell.edu/people/ah29" target="_blank">more about him</a> This video is from Tech Insider Youtube channel 
+                </p>
+
+                <h2 id="appHelp">How to use this app?</h2>
+                <div class="center">
+                    <img class="postImage" height="100%" src="/assets/tshirt-with-pocket.png" >
+                </div>
+                <p>
+                    Sit straight and still as shown in the above video and press the "Start" Button
+                    and put you phone in your chest pocket, pouch or in Bra strap, it will auto detect and lock the position
+                    Once the position is locked a green status will be shown with sound
+                </p>
+                <p> If you change your positing it will notify you by vibration, beep and red status. Once you move back
+                    to
+                    the correct position the notification will stop
+                </p>
+
+                <p><b>Use Earphone for better results</b></p>
+  
+                <h2>Side effects of bad sitting posture</h2>
+                <div class="center">
+                    <iframe  height="100%" src="https://www.youtube-nocookie.com/embed/wUEl8KrMz14?start=4" frameborder="0" allow=" encrypted-media;" allowfullscreen></iframe>
+                </div>
+
+            </div>
             <div class="stats">
                 <div class="output" id="x"></div>
                 <div class="output" id="y"></div>
@@ -140,10 +172,11 @@
             <div class="hiddenElements">
 
             </div>
-            <div class="version">v87</div>
+
 
         </div>
     </div>
+
 </body>
 
 </html>

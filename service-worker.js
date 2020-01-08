@@ -1,4 +1,4 @@
-let version = 1.3;
+let version = 1.4;
 
 let cacheName = "posturefixz" + version;
 
@@ -15,6 +15,7 @@ let filesToCache = [
   "/posturefixz/assets/icons/twitter.png",
   "/posturefixz/assets/icons/whatsapp_share.png",
   "/posturefixz/assets/audio/media.js",
+  "/posturefixz/assets/tshirt-with-pocket.png",
   'https://fonts.googleapis.com/css?family=Open+Sans&display=swap'
 ];
 
