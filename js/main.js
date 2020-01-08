@@ -30,7 +30,7 @@ window.addEventListener('load', _ => {
         let anchor = document.createElement('a');
         let greetings=``;
         if(maxScore>0){
-            greetings= `${maxScore}!! My new max score in Posture Fix! beat my score ${document.location.href}`
+            greetings= `${Math.floor(maxScore)}!! My new max score in Posture Fix! beat my score ${document.location.href}`
         }
         else{
             greetings= `Improve your sitting posture by using Posture Fix!! check this ${document.location.href}`
