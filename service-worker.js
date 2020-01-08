@@ -9,7 +9,11 @@ let filesToCache = [
 	"/posturefixz/js/settings.js",
 	"/posturefixz/js/NoSleep.min.js",
   "/posturefixz/css/main.css",
+  "/posturefixz/assets/screen.png",
   "/posturefixz/assets/icons/icon.png",
+  "/posturefixz/assets/icons/facebook.png",
+  "/posturefixz/assets/icons/twitter.png",
+  "/posturefixz/assets/icons/whatsapp_share.png",
   "/posturefixz/assets/audio/media.js",
   'https://fonts.googleapis.com/css?family=Open+Sans&display=swap'
 ];

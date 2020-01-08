@@ -71,12 +71,12 @@ header img {
 
 .board {
     border: 1px solid #e9e9e9;
-    padding: 5px 2px 0px  10px;
+    padding: 0px 2px 0px  10px;
     height: 140px;
     box-shadow: 0 0 10px 1px #c8c8c840;
     margin-bottom: 20px;
     display: grid;
-    grid-template-columns: 3fr 1fr auto;
+    grid-template-columns: 3fr 2fr auto;
     grid-template-rows: 1fr auto;
     position: relative;
     overflow: hidden;
@@ -151,8 +151,7 @@ header img {
 .socialShareGroup {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 5px 0;
+    justify-content: space-around;
 }
 
 .shareIcon {
