@@ -41,6 +41,22 @@ window.addEventListener('load', _ => {
         anchor.click();
     })
 
+    document.querySelector('#facebookShare').addEventListener('click', _ => {
+        let anchor = document.createElement('a');
+        let greetings=``;
+        if(maxScore>0){
+            greetings= `${Math.floor(maxScore)}!! My new max score in Posture Fix! beat my score `
+        }
+        else{
+            greetings= `Improve your sitting posture by using Posture Fix!! check this`
+        }
+        greetings = encodeURIComponent(greetings)
+        anchor.href = `https://www.facebook.com/sharer/sharer.php?u=${document.location.href}&quote=${greetings}`
+        anchor.setAttribute('target', '_blank')
+        anchor.click();
+    })
+
+
     let throttled = false;
     window.addEventListener('deviceorientation', (event) => {
 
