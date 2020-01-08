@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Social meta-->
+    <meta property="og:title" content="Posture Fixz" />
+    <meta property="og:url" content="https://prnysarker.github.io/posturefixz/" />
+    <meta property="og:description" content="A sitting posture assistance game" />
+    <meta property="og:image" content="./assets/screen.png"/>
+    <meta property="og:type" content="game" />
+    <!---->
     <link rel="apple-touch-icon" sizes="180x180" href="/posturefixz/assets/icons/icon.png">
     <link rel="icon" type="image/png" href="/posturefixz/assets/icons/icon.png" sizes="32x32">
     <link rel="icon" type="image/png" href="/posturefixz/assets/icons/icon.png" sizes="16x16">
@@ -20,7 +27,7 @@
                 });
         }
     </script>
-    <script  defer src="./assets/audio/media.js" ></script>
+    <script defer src="./assets/audio/media.js"></script>
     <script src="js/NoSleep.min.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/main.js"></script>
@@ -49,9 +56,23 @@
                         <div class="data" id="maxScoreValue">0</div>
                     </div>
                 </div>
-                <div class="socialShares">
-                    <div ></div>
+                <div class="socialShareGroup">
+                    <div class="socialShares">
+                        <div class="shareIcon">
+                            <button id="whatsAppShare">
+                                <img src="./assets/icons/whatsapp_share.png">
+                            </button>
+                           
+                        </div>
+                    </div>
+                   <!-- <div class="socialShares">
+                        <div class="shareIcon twitterIcon"><img src="./assets/icons/twitter.png"></div>
+                    </div>
+                    <div class="socialShares">
+                        <div class="shareIcon"><img src="./assets/icons/facebook.png"></div>
+                    </div> -->
                 </div>
+
             </div>
             <div class="controllers">
                 <div class="center">
@@ -106,7 +127,7 @@
             </div>
             <div class="hiddenElements">
 
-            </div>     
+            </div>
             <div class="version">v87</div>
 
         </div>

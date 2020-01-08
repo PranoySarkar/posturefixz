@@ -3,6 +3,9 @@ body {
     color: #636363;
     font-family: 'Open Sans', sans-serif;
 }
+img {
+    width: 100%;
+}
 
 .container {
     height: 100vh;
@@ -68,12 +71,12 @@ header img {
 
 .board {
     border: 1px solid #e9e9e9;
-    padding: 10px 10px 0px  10px;
+    padding: 5px 2px 0px  10px;
     height: 140px;
     box-shadow: 0 0 10px 1px #c8c8c840;
     margin-bottom: 20px;
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 3fr 1fr auto;
     grid-template-rows: 1fr auto;
     position: relative;
     overflow: hidden;
@@ -131,7 +134,7 @@ header img {
 
 .currentScore .data {
     /* background: antiquewhite; */
-    padding: 10px;
+    padding: 0px;
     /* height: 100%; */
     display: flex;
     justify-content: center;
@@ -144,6 +147,44 @@ header img {
 .maxScore .data {
     color: #7B1FA2;
     font-size: 1.5rem;
+}
+.socialShareGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 5px 0;
+}
+
+.shareIcon {
+    border: 1px solid #e7e7e7;
+    width: 40px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0px 0px #d6d6d6;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+.shareIcon button {
+    border: 0;
+    background: transparent;
+    outline: none;
+    padding: 1px 0px;
+    margin: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+.twitterIcon {
+    padding: 5px 4px 5px 6px;
+    /* padding-left: 7px; */
+}
+.socialShares {
+    text-align: right;
 }
 
 .controllers {

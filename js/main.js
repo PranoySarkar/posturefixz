@@ -26,6 +26,20 @@ window.addEventListener('load', _ => {
     const maxScoreValue = document.querySelector('#maxScoreValue');
     maxScoreValue.innerHTML = Math.floor(maxScore);
     const indicator = document.querySelector('#indicator');
+    document.querySelector('#whatsAppShare').addEventListener('click', _ => {
+        let anchor = document.createElement('a');
+        let greetings=``;
+        if(maxScore>0){
+            greetings= `${maxScore}!! My new max score in Posture Fix! beat my score ${document.location.href}`
+        }
+        else{
+            greetings= `Improve your sitting posture by using Posture Fix!! check this ${document.location.href}`
+        }
+        greetings = encodeURIComponent(greetings)
+        anchor.href = `whatsapp://send?text=${greetings}`
+        anchor.setAttribute('target', '_blank')
+        anchor.click();
+    })
 
     let throttled = false;
     window.addEventListener('deviceorientation', (event) => {
