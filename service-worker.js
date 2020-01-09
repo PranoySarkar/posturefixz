@@ -1,4 +1,4 @@
-let version = 1.4;
+let version = 1.5;
 
 let cacheName = "posturefixz" + version;
 
@@ -21,9 +21,6 @@ let filesToCache = [
   "/posturefixz/assets/tshirt-with-pocket.png",
   "/posturefixz/assets/girl_with_pouch.jpg",
   'https://fonts.googleapis.com/css?family=Open+Sans&display=swap',
-  'https://s.ytimg.com/yts/jsbin/www-embed-player-vflz1y42B/www-embed-player.js',
-  'https://s.ytimg.com/yts/cssbin/www-player-webp-vflu2oWSj.css',
-  'https://s.ytimg.com/yts/jsbin/player_ias-vflDLieI-/en_US/remote.js',
   'https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxK.woff2',
 ];
 
