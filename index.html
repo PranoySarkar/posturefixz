@@ -20,19 +20,7 @@
     <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> -->
     <meta name="theme-color" content="#FFFFFF">
     <link rel="manifest" href="manifest.json">
-    <script type="text/javascript">
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker
-                .register(`./service-worker.js`)
-                .then(function () {
-                    console.log("Service Worker Registered");
-                });
-        }
-    </script>
-    <script defer src="./assets/audio/media.js"></script>
-    <script defer src="js/NoSleep.min.js"></script>
-    <script defer src="js/settings.js"></script>
-    <script defer src="js/main.js"></script>
+
     <link rel="stylesheet" href="css/main.css">
     <title>Posture Fix</title>
 
@@ -62,7 +50,7 @@
                     <div class="socialShares">
                         <div class="shareIcon">
                             <button id="whatsAppShare">
-                                <img alt="share with whatsapp" src="./assets/icons/whatsapp_share.jpg">
+                                <img  aria-label="share with whatsapp" alt="share with whatsapp" src="./assets/icons/whatsapp_share.jpg">
                             </button>
 
                         </div>
@@ -70,14 +58,14 @@
                     <div class="socialShares">
                         <div class="shareIcon">
                             <button id="facebookShare">
-                                <img alt="share with facebook"src="./assets/icons/facebook.jpg">
+                                <img aria-label="share with facebook" alt="share with facebook"src="./assets/icons/facebook.jpg">
                             </button>
                         </div>
                     </div>
                     <div class="socialShares">
                         <div class="shareIcon">
                             <button id="twitterShare">
-                                <img alt="share with twitter" src="./assets/icons/twitter.jpg">
+                                <img aria-label="share with twitter" alt="share with twitter" src="./assets/icons/twitter.jpg">
                             </button>
                         </div>
                     </div>
@@ -137,7 +125,7 @@
             <div id="help">
                 <h2>How to Sit properly? </h2>
                 <div class="center">
-                    <iframe height="100%" src="https://www.youtube-nocookie.com/embed/xzV1Hej61CY?start=7"
+                    <iframe title="How to Sit properly" height="100%" src="https://www.youtube-nocookie.com/embed/xzV1Hej61CY?start=7"
                         frameborder="0" allow="encrypted-media; " allowfullscreen></iframe>
                 </div>
                 <p>This is Dr Alan Hedge from Cornell University he is an Ergonomics professor (Ergonomics: relating to
@@ -148,8 +136,8 @@
 
                 <h2 id="appHelp">How to use this app?</h2>
                 <div class="center avatars">
-                    <img alt="image describing cellphone in pocket" class="postImage" height="100%" src="assets/tshirt-with-pocket.jpg">
-                    <img alt="image describing cell phone in mobile pouch" class="postImage girlPouch" height="100%" src="assets/girl_with_pouch.jpg">
+                    <img aria-label="image describing cellphone in pocket"  alt="image describing cellphone in pocket" class="postImage" height="100%" src="assets/tshirt-with-pocket.jpg">
+                    <img aria-label="image describing cell phone in mobile pouch" alt="image describing cell phone in mobile pouch" class="postImage girlPouch" height="100%" src="assets/girl_with_pouch.jpg">
                 </div>
                 <p>
                     Sit straight and still as shown in the above video and press the "Start" Button
@@ -166,7 +154,7 @@
 
                 <h2>Side effects of bad sitting posture</h2>
                 <div class="center">
-                    <iframe height="100%" src="https://www.youtube-nocookie.com/embed/wUEl8KrMz14?start=4"
+                    <iframe title="Side effects of bad sitting posture" height="100%" src="https://www.youtube-nocookie.com/embed/wUEl8KrMz14?start=4"
                         frameborder="0" allow=" encrypted-media;" allowfullscreen></iframe>
                 </div>
 
@@ -193,6 +181,19 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register(`./service-worker.js`)
+                .then(function () {
+                    console.log("Service Worker Registered");
+                });
+        }
+    </script>
+    <script defer src="js/media.js"></script>
+    <script defer src="js/NoSleep.min.js"></script>
+    <script defer src="js/settings.js"></script>
+    <script defer src="js/main.js"></script>
 </body>
 
 </html>
