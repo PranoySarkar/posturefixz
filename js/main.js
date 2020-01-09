@@ -3,13 +3,16 @@ window.addEventListener('load', _ => {
 
     fetch('config.json').then(response => { return response.json() }).then(config => {
         document.body.append(JSON.stringify(config))
-        if (Settings.getVersion() == 0 ) {
+        document.body.append(`pv ${Settings.getVersion()}  `)
+        if (Settings.getVersion() == 0 && false) {
             Settings.setVersion(config.version)
         }
         else if (Settings.getVersion() != config.version) {
             alert('new version found')
             Settings.setVersion(config.version)
+            document.body.append('adding new version')
             fetch('config.json?clean-cache=true').then(_ => {
+                document.body.append('cache cleaned')
                 alert('cache cleaned')
                 window.location.reload(true);
             })
