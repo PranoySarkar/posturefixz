@@ -1,7 +1,7 @@
 {
   "name": "Posture Fixz",
   "short_name": "PostureFixz",
-  "start_url": "/posturefixz/index.html",
+  "start_url": "/posturefixz",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff",
