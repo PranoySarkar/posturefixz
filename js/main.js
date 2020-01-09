@@ -1,17 +1,25 @@
 window.addEventListener('load', _ => {
     Settings.initIfNot();
 
-    fetch('config.json').then(response=>{return response.json()}).then(config=>{
-        if(Settings.getVersion()==0){
+    fetch('config.json').then(response => { return response.json() }).then(config => {
+        if (Settings.getVersion() == 0) {
             Settings.setVersion(config.version)
         }
-        else if(Settings.getVersion()!=config.version){
+        else if (Settings.getVersion() != config.version) {
             Settings.setVersion(config.version)
-            window.location.reload();
-          
+            navigator.serviceWorker.getRegistrations()
+            .then(function (registrations) {
+                for (let registration of registrations) {
+                    registration.unregister()
+                }
+            }).then(_=>{
+                window.location.reload(true);
+            })
+            
+
         }
     })
-    
+
     let currentScore = 0;
     let maxScore = Settings.getMaxScore();
 
@@ -40,12 +48,12 @@ window.addEventListener('load', _ => {
     const indicator = document.querySelector('#indicator');
     document.querySelector('#whatsAppShare').addEventListener('click', _ => {
         let anchor = document.createElement('a');
-        let greetings=``;
-        if(maxScore>0){
-            greetings= `${Math.floor(maxScore)}!! My new max score in Posture Fix!  Improve your sitting posture & beat my score ${document.location.href}`
+        let greetings = ``;
+        if (maxScore > 0) {
+            greetings = `${Math.floor(maxScore)}!! My new max score in Posture Fix!  Improve your sitting posture & beat my score ${document.location.href}`
         }
-        else{
-            greetings= `Improve your sitting posture by using Posture Fix!! check this ${document.location.href}`
+        else {
+            greetings = `Improve your sitting posture by using Posture Fix!! check this ${document.location.href}`
         }
         greetings = encodeURIComponent(greetings)
         anchor.href = `whatsapp://send?text=${greetings}`
@@ -55,12 +63,12 @@ window.addEventListener('load', _ => {
 
     document.querySelector('#facebookShare').addEventListener('click', _ => {
         let anchor = document.createElement('a');
-        let greetings=``;
-        if(maxScore>0){
-            greetings= `${Math.floor(maxScore)}!! My new max score in Posture Fix! Improve your sitting posture & beat my score`
+        let greetings = ``;
+        if (maxScore > 0) {
+            greetings = `${Math.floor(maxScore)}!! My new max score in Posture Fix! Improve your sitting posture & beat my score`
         }
-        else{
-            greetings= `Improve your sitting posture by using Posture Fix!! check this`
+        else {
+            greetings = `Improve your sitting posture by using Posture Fix!! check this`
         }
         greetings = encodeURIComponent(greetings)
         anchor.href = `https://www.facebook.com/sharer/sharer.php?u=${document.location.href}&quote=${greetings}`
@@ -70,12 +78,12 @@ window.addEventListener('load', _ => {
 
     document.querySelector('#twitterShare').addEventListener('click', _ => {
         let anchor = document.createElement('a');
-        let greetings=``;
-        if(maxScore>0){
-            greetings= `${Math.floor(maxScore)}!! My new max score in Posture Fix! Improve your sitting posture & beat my score`
+        let greetings = ``;
+        if (maxScore > 0) {
+            greetings = `${Math.floor(maxScore)}!! My new max score in Posture Fix! Improve your sitting posture & beat my score`
         }
-        else{
-            greetings= `Improve your sitting posture by using Posture Fix!! check this`
+        else {
+            greetings = `Improve your sitting posture by using Posture Fix!! check this`
         }
         greetings = encodeURIComponent(greetings)
         anchor.href = `https://twitter.com/intent/tweet?url=${document.location.href}&text=${greetings}&related=postureFixz`

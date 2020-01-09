@@ -14,8 +14,7 @@ img {
     min-height: 100vh;
     max-width: 500px;
     position: relative;
-    box-sizing: border-box;
-    border: 1px solid #e9e9e9;
+    box-sizing: border-box
 }
 
 .center {
@@ -331,8 +330,9 @@ video {
 }
 
 footer {
-    border: 1px solid #e5dada;
+    border-top: 1px solid #e5dada;
     /* background: #efefef; */
     padding: 10px;
+    margin: -10px;
     margin-top: 10px;
 }
