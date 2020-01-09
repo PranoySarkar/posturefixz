@@ -2,18 +2,14 @@ window.addEventListener('load', _ => {
     Settings.initIfNot();
 
     fetch(`config.json?cacheBust=${new Date().getTime()}`).then(response => { return response.json() }).then(config => {
-        //document.body.append(JSON.stringify(config))
-        document.body.append(`pv ${Settings.getVersion()}  `)
-        if (Settings.getVersion() == 0 && false) {
+        if (Settings.getVersion() == 0) {
             Settings.setVersion(config.version)
         }
         else if (Settings.getVersion() != config.version) {
-            alert('new version found')
             Settings.setVersion(config.version)
-            document.body.append('adding new version')
             fetch(`config.json?clean-cache=true&cacheBust=${new Date().getTime()}`).then(_ => {
                 document.body.append('cache cleaned')
-                alert('cache cleaned')
+                
                 window.location.reload(true);
             })
            
