@@ -1,5 +1,17 @@
 window.addEventListener('load', _ => {
     Settings.initIfNot();
+
+    fetch('/config.json').then(response=>{return response.json()}).then(config=>{
+        if(Settings.getVersion()==0){
+            Settings.setVersion(config.version)
+        }
+        else if(Settings.getVersion()!=config.version){
+            Settings.setVersion(config.version)
+            window.location.reload();
+          
+        }
+    })
+    
     let currentScore = 0;
     let maxScore = Settings.getMaxScore();
 

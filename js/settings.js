@@ -24,4 +24,14 @@ var Settings = {
         settings.maxScore=maxScore;
         localStorage.setItem('settings', JSON.stringify(settings))
     },
+    getVersion:()=>{
+        let settings= JSON.parse(localStorage.getItem('settings'));
+        return settings.version || 0;
+    },
+    setVersion:(version)=>{
+        let settings= JSON.parse(localStorage.getItem('settings'));
+        settings.version=version;
+        localStorage.setItem('settings', JSON.stringify(settings))
+    },
+
 }
