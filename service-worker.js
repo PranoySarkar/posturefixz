@@ -3,7 +3,6 @@ let version = 1.5;
 let cacheName = "posturefixz" + version;
 
 let filesToCache = [
-  "/",
   "/posturefixz/",
   "/posturefixz/index.html",
   "/posturefixz/js/main.js",
@@ -26,16 +25,20 @@ let filesToCache = [
 
 self.addEventListener("install", function (event) {
   event.waitUntil(caches.open(cacheName).then((cache) => {
+    console.log('installed successfully')
     return cache.addAll(filesToCache);
   }));
 });
 
 self.addEventListener('fetch', function (event) {
   if (event.request.url.includes('clean-cache')) {
-    //console.log('Cache cleared')
+    console.log('Cache cleared')
     caches.delete(cacheName);
   }
   event.respondWith(caches.match(event.request).then(function (response) {
+    if(response){
+      console.log('served form cache')
+    }
     return response || fetch(event.request);
   })
   );
@@ -46,7 +49,7 @@ self.addEventListener('activate', function (e) {
     caches.keys().then(function (keyList) {
       return Promise.all(keyList.map(function (key) {
         if (key !== cacheName) {
-         // console.log('service worker: Removing old cache', key);
+         console.log('service worker: Removing old cache', key);
           return caches.delete(key);
         }
       }));
