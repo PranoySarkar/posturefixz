@@ -3,19 +3,19 @@ let version = 1.4;
 let cacheName = "posturefixz" + version;
 
 let filesToCache = [
-  "/",
-  "/index.html",
-  "/js/main.js",
-  "/js/settings.js",
-  "/js/NoSleep.min.js",
-  "/css/main.css",
-  "/assets/screen.png",
-  "/assets/icons/icon.png",
-  "/assets/icons/facebook.png",
-  "/assets/icons/twitter.png",
-  "/assets/icons/whatsapp_share.png",
-  "/assets/audio/media.js",
-  "/assets/tshirt-with-pocket.png",
+  "/posturefixz/",
+  "/posturefixz/index.html",
+  "/posturefixz/js/main.js",
+  "/posturefixz/js/settings.js",
+  "/posturefixz/js/NoSleep.min.js",
+  "/posturefixz/css/main.css",
+  "/posturefixz/assets/screen.png",
+  "/posturefixz/assets/icons/icon.png",
+  "/posturefixz/assets/icons/facebook.png",
+  "/posturefixz/assets/icons/twitter.png",
+  "/posturefixz/assets/icons/whatsapp_share.png",
+  "/posturefixz/assets/audio/media.js",
+  "/posturefixz/assets/tshirt-with-pocket.png",
   'https://fonts.googleapis.com/css?family=Open+Sans&display=swap'
 ];
 
