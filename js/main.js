@@ -3,7 +3,7 @@ window.addEventListener('load', _ => {
 
     fetch('config.json').then(response => { return response.json() }).then(config => {
         document.body.append(JSON.stringify(config))
-        if (Settings.getVersion() == 0 && false) {
+        if (Settings.getVersion() == 0 ) {
             Settings.setVersion(config.version)
         }
         else if (Settings.getVersion() != config.version) {
