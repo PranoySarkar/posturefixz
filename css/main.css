@@ -329,3 +329,10 @@ video {
     height: 140px;
     width: 140px;
 }
+
+footer {
+    border: 1px solid #e5dada;
+    /* background: #efefef; */
+    padding: 10px;
+    margin-top: 10px;
+}
