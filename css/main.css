@@ -335,6 +335,8 @@ footer {
     padding: 10px;
     margin: -10px;
     margin-top: 10px;
+    background: #4a4c4d;
+    color: #FFF;
 }
 
 .copyRightDiv {
