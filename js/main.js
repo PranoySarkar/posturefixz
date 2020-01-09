@@ -2,14 +2,18 @@ window.addEventListener('load', _ => {
     Settings.initIfNot();
 
     fetch('config.json').then(response => { return response.json() }).then(config => {
-        fetch('config.json?clean-cache=true');
+
         if (Settings.getVersion() == 0) {
             Settings.setVersion(config.version)
         }
         else if (Settings.getVersion() != config.version) {
+            alert('new version found')
             Settings.setVersion(config.version)
-            fetch('clean-cache');
-            window.location.reload(true);
+            fetch('config.json?clean-cache=true').then(_ => {
+                alert('cache cleaned')
+                window.location.reload(true);
+            })
+           
         }
     })
 
