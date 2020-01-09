@@ -2,7 +2,7 @@ window.addEventListener('load', _ => {
     Settings.initIfNot();
 
     fetch('config.json').then(response => { return response.json() }).then(config => {
-        document.body.append(JSON.stringify(config))
+        //document.body.append(JSON.stringify(config))
         document.body.append(`pv ${Settings.getVersion()}  `)
         if (Settings.getVersion() == 0 && false) {
             Settings.setVersion(config.version)
