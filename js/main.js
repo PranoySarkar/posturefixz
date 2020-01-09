@@ -2,21 +2,14 @@ window.addEventListener('load', _ => {
     Settings.initIfNot();
 
     fetch('config.json').then(response => { return response.json() }).then(config => {
+        fetch('config.json?clean-cache=true');
         if (Settings.getVersion() == 0) {
             Settings.setVersion(config.version)
         }
         else if (Settings.getVersion() != config.version) {
             Settings.setVersion(config.version)
-            navigator.serviceWorker.getRegistrations()
-            .then(function (registrations) {
-                for (let registration of registrations) {
-                    registration.unregister()
-                }
-            }).then(_=>{
-                window.location.reload(true);
-            })
-            
-
+            fetch('clean-cache');
+            window.location.reload(true);
         }
     })
 
