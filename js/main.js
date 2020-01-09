@@ -2,8 +2,8 @@ window.addEventListener('load', _ => {
     Settings.initIfNot();
 
     fetch('config.json').then(response => { return response.json() }).then(config => {
-
-        if (Settings.getVersion() == 0) {
+        document.body.append(JSON.stringify(config))
+        if (Settings.getVersion() == 0 && false) {
             Settings.setVersion(config.version)
         }
         else if (Settings.getVersion() != config.version) {
