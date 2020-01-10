@@ -206,7 +206,8 @@ window.addEventListener('load', _ => {
             positionLocked = 'IN_PROGRESS'
             lockBtn.innerHTML = "Detecting Position";
             indicator.classList.add('indicator-searching')
-            detectPositionTimer = setInterval(detectPosition, 100);
+            detectPosition();
+            detectPositionTimer = setInterval(detectPosition, 500);
 
             noSleep.enable();
 
@@ -236,7 +237,7 @@ window.addEventListener('load', _ => {
         x: -3535
     }
     function detectPosition() {
-        if (Math.abs(temp.x - axe) < 1) {
+        if (Math.abs(temp.x - axe) < 2) {
             positionDetectionConfidence++;
 
         } else {
@@ -249,7 +250,7 @@ window.addEventListener('load', _ => {
         } else {
             lockBtn.style.borderWidth = '3px'
         }
-        if (positionDetectionConfidence > 10) {
+        if (positionDetectionConfidence > 5) {
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
             console.log('Good position detected')

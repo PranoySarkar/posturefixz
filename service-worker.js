@@ -1,4 +1,4 @@
-let version = 1.5;
+let version = 1.08;
 
 let cacheName = "posturefixz" + version;
 
@@ -38,6 +38,8 @@ self.addEventListener('fetch', function (event) {
   event.respondWith(caches.match(event.request).then(function (response) {
     if(response){
       console.log('served form cache')
+    }else{
+      console.log('Not serving from cache ',event.request.url)
     }
     return response || fetch(event.request);
   })
