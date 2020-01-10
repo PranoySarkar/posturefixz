@@ -227,7 +227,7 @@ window.addEventListener('load', _ => {
         currentScore = 0;
         throttlingFrequency=500
         window.navigator.vibrate([100, 100, 100]);
-
+        history='';
         lockBtn.innerHTML = "Stop";
 
     }
@@ -242,7 +242,7 @@ window.addEventListener('load', _ => {
     }
     let history='';
     function detectPosition() {
-        history+=Math.abs(temp.x - axe)+'';
+        history+=Math.abs(temp.x - axe)+'-';
         if (Math.abs(temp.x - axe) < 4) {
             positionDetectionConfidence++;
 
