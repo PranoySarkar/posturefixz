@@ -122,7 +122,7 @@ window.addEventListener('load', _ => {
                         status += `<br/>Gama ${gamma} Locked  ${lockedAxis.z} diff ${Math.abs(gamma - lockedAxis.z)}`
                         notifyIncorrectPosture();
                     }
-                    status += `<br/> Status ${goodPosition}<br />`
+                    
                     if (goodPosition) {
 
                         if (incorrectPostureTimer != null) {
@@ -138,6 +138,7 @@ window.addEventListener('load', _ => {
                         }
 
                     } else {
+                        status += ` Status ${goodPosition} <br />`
                         if (positionLocked === true) {
                             currentScore = currentScore > .15 ? currentScore - .15 : 0;
                             indicator.classList.add('indicator-badPosture')
