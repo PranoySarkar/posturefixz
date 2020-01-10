@@ -146,20 +146,20 @@ window.addEventListener('load', _ => {
                     op.innerHTML = ``
                     clearInterval(incorrectPostureTimer)
                     incorrectPostureTimer = null;
-                    axe = Math.round(event.alpha);
+                    axe = Math.floor(event.alpha);
                     if (allAxis.checked) {
                         xDom.innerHTML = `X ${axe}`;
                     } else {
                         xDom.innerHTML = ''
                     }
-                    ye = Math.round(event.beta);
+                    ye = Math.floor(event.beta);
                     if (allAxis.checked || portraitRadioY.checked) {
                         yDom.innerHTML = `Y ${ye}`;
                     }
                     else {
                         yDom.innerHTML = ''
                     }
-                    zee = Math.round(event.gamma);
+                    zee = Math.floor(event.gamma);
                     if (allAxis.checked || landscapeRadioZ.checked) {
                         zDom.innerHTML = `Z ${zee}`;
                     } else {
@@ -205,6 +205,7 @@ window.addEventListener('load', _ => {
         } else {
             positionLocked = 'IN_PROGRESS'
             lockBtn.innerHTML = "Detecting Position";
+            currentScoreValue.innerHTML = "0";
             indicator.classList.add('indicator-searching')
             detectPosition();
             detectPositionTimer = setInterval(detectPosition, 500);
@@ -237,7 +238,7 @@ window.addEventListener('load', _ => {
         x: -3535
     }
     function detectPosition() {
-        if (Math.abs(temp.x - axe) < 3) {
+        if (Math.abs(temp.x - axe) < 4) {
             positionDetectionConfidence++;
 
         } else {
