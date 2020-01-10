@@ -154,7 +154,7 @@ window.addEventListener('load', _ => {
 
                 }
                 else {
-                    op.innerHTML = ``
+                   // op.innerHTML = ``
                     clearInterval(incorrectPostureTimer)
                     incorrectPostureTimer = null;
                     axe = Math.abs(Math.floor(event.alpha));
