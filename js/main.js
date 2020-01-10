@@ -237,7 +237,7 @@ window.addEventListener('load', _ => {
         x: -3535
     }
     function detectPosition() {
-        if (Math.abs(temp.x - axe) < 2) {
+        if (Math.abs(temp.x - axe) < 3) {
             positionDetectionConfidence++;
 
         } else {
