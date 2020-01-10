@@ -70,13 +70,13 @@ header img {
 }
 
 .stats {
-
     padding: 5px;
     border-radius: 2px;
     min-width: 250px;
     min-height: 125px;
     font-size: .5rem;
-    display: none;
+    border: 1px solid #c0abab;
+    overflow: auto;
 }
 
 .board {

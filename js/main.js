@@ -1,3 +1,5 @@
+let analytics = {}
+
 window.addEventListener('load', _ => {
     Settings.initIfNot();
 
@@ -9,16 +11,16 @@ window.addEventListener('load', _ => {
             Settings.setVersion(config.version)
             fetch(`config.json?clean-cache=true&cacheBust=${new Date().getTime()}`).then(_ => {
                 document.body.append('cache cleaned')
-                
+
                 window.location.reload(true);
             })
-           
+
         }
     })
 
     let currentScore = 0;
     let maxScore = Settings.getMaxScore();
-    let throttlingFrequency=500;
+    let throttlingFrequency = 500;
 
     let axe = 0;
     let ye = 0;
@@ -95,27 +97,34 @@ window.addEventListener('load', _ => {
         if (!throttled) {
             throttled = true;
             setTimeout((event) => {
+                op.innerHTML += ''
+
+
+                let alpha = Math.abs(Math.floor(event.alpha));
+                let beta = Math.abs(Math.floor(event.beta));
+                let gamma = Math.abs(Math.floor(event.gamma));
+                let status = ''
                 if (positionLocked === true) {
                     let goodPosition = true;
-                    op.innerHTML = '';
-                    if (allAxis.checked && Math.abs(event.alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
-                        op.innerHTML = `Out Of posture by x ${Math.round(event.alpha)}<br/>`
-                        goodPosition = false;
-                        notifyIncorrectPosture();
 
-                    }
-                    if ((allAxis.checked || portraitRadioY.checked) && Math.abs(event.beta - lockedAxis.y) > Number.parseFloat(delta.value)) {
-                        op.innerHTML += `Out Of posture by Y ${Math.round(event.beta)}<br/>`
+                    if (allAxis.checked && false && Math.abs(alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
                         goodPosition = false;
                         notifyIncorrectPosture();
                     }
-                    if ((allAxis.checked || landscapeRadioZ.checked ) && Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value+3)) {
-                        op.innerHTML += `Out Of posture by Z ${Math.round(event.gamma)}<br/>`
+                    if ((allAxis.checked || portraitRadioY.checked) && (Math.abs(beta - lockedAxis.y)) > Number.parseFloat(delta.value)) {
+                        status += `Beta ${beta} Locked  ${lockedAxis.y} diff ${(Math.abs(beta - lockedAxis.y))}`
                         goodPosition = false;
                         notifyIncorrectPosture();
                     }
+                    if ((allAxis.checked || landscapeRadioZ.checked || true) && 
+                    (Math.abs(gamma - lockedAxis.z) > Number.parseFloat(delta.value))) {
+                         goodPosition = false;
+                        status += `<br/>Gama ${gamma} Locked  ${lockedAxis.z} diff ${Math.abs(gamma - lockedAxis.z)}`
+                        notifyIncorrectPosture();
+                    }
+                    status += `<br/> Status ${goodPosition}<br />`
                     if (goodPosition) {
-                        op.innerHTML += `Good Possition detected`
+
                         if (incorrectPostureTimer != null) {
                             clearInterval(incorrectPostureTimer);
                             incorrectPostureTimer = null;
@@ -141,26 +150,27 @@ window.addEventListener('load', _ => {
                         maxScoreValue.innerHTML = Math.floor(currentScore);
                     }
                     currentScoreValue.innerHTML = Math.floor(currentScore);
+                    op.innerHTML += `<br /> ${status}`
 
                 }
                 else {
                     op.innerHTML = ``
                     clearInterval(incorrectPostureTimer)
                     incorrectPostureTimer = null;
-                    axe = Math.floor(event.alpha);
+                    axe = Math.abs(Math.floor(event.alpha));
                     if (allAxis.checked) {
                         xDom.innerHTML = `X ${axe}`;
                     } else {
                         xDom.innerHTML = ''
                     }
-                    ye = Math.floor(event.beta);
+                    ye = Math.abs(Math.floor(event.beta));
                     if (allAxis.checked || portraitRadioY.checked) {
                         yDom.innerHTML = `Y ${ye}`;
                     }
                     else {
                         yDom.innerHTML = ''
                     }
-                    zee = Math.floor(event.gamma);
+                    zee = Math.abs(Math.floor(event.gamma));
                     if (allAxis.checked || landscapeRadioZ.checked) {
                         zDom.innerHTML = `Z ${zee}`;
                     } else {
@@ -191,7 +201,8 @@ window.addEventListener('load', _ => {
     const noSleep = new NoSleep();
     let detectPositionTimer = null;
     document.querySelector('#lockBtn').addEventListener('click', event => {
-
+        analytics.detectPosition = []
+        analytics.move = [];
 
         if (positionLocked === 'IN_PROGRESS' || positionLocked == true) {
             clearInterval(detectPositionTimer);
@@ -208,7 +219,7 @@ window.addEventListener('load', _ => {
             lockBtn.innerHTML = "Detecting Position";
             currentScoreValue.innerHTML = "0";
             indicator.classList.add('indicator-searching')
-            throttlingFrequency=100;
+            throttlingFrequency = 100;
             detectPosition();
             detectPositionTimer = setInterval(detectPosition, 100);
 
@@ -219,15 +230,17 @@ window.addEventListener('load', _ => {
     })
 
     function lockPosition() {
+
         lockedAxis.x = axe;
         lockedAxis.y = ye;
         lockedAxis.z = zee;
         positionLocked = true
+        analytics.lockedAxis = lockedAxis;
         possitiveSound.play();
         currentScore = 0;
-        throttlingFrequency=500
+        throttlingFrequency = 500
         window.navigator.vibrate([100, 100, 100]);
-       // history='';
+        // history='';
         lockBtn.innerHTML = "Stop";
 
     }
@@ -240,16 +253,19 @@ window.addEventListener('load', _ => {
     let temp = {
         x: -3535
     }
+
     let history='';
+
     function detectPosition() {
-        history+=Math.abs(temp.x - axe)+'-';
+       
+
+        history+=axe+'-'
         if (Math.abs(temp.x - axe) <= 5) {
             positionDetectionConfidence++;
-
+            
         } else {
+            history+= 'reset';
             positionDetectionConfidence = 0;
-            history+='[reset]'
-            //console.log('Confidence reset')
             temp.x = axe
         }
         if (getComputedStyle(lockBtn).borderWidth == '3px') {
@@ -257,13 +273,15 @@ window.addEventListener('load', _ => {
         } else {
             lockBtn.style.borderWidth = '3px'
         }
+     
         if (positionDetectionConfidence > 10) {
+            history.success = true;
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
-            document.querySelector('.op').innerHTML=history;
-            history='';
+            document.querySelector('.op').innerHTML = history;
             lockPosition();
         }
+        analytics.detectPosition.push(history)
     }
 
 
