@@ -109,7 +109,7 @@ window.addEventListener('load', _ => {
                         goodPosition = false;
                         notifyIncorrectPosture();
                     }
-                    if ((allAxis.checked || landscapeRadioZ.checked) && Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
+                    if ((allAxis.checked || landscapeRadioZ.checked || true) && Math.abs(event.gamma - lockedAxis.z) > Number.parseFloat(delta.value)) {
                         op.innerHTML += `Out Of posture by Z ${Math.round(event.gamma)}<br/>`
                         goodPosition = false;
                         notifyIncorrectPosture();
