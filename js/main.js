@@ -18,6 +18,7 @@ window.addEventListener('load', _ => {
 
     let currentScore = 0;
     let maxScore = Settings.getMaxScore();
+    let throttlingFrequency=500;
 
     let axe = 0;
     let ye = 0;
@@ -167,7 +168,7 @@ window.addEventListener('load', _ => {
                     }
                 }
                 throttled = false;
-            }, 500, event)
+            }, throttlingFrequency, event)
         }
 
     })
@@ -207,8 +208,9 @@ window.addEventListener('load', _ => {
             lockBtn.innerHTML = "Detecting Position";
             currentScoreValue.innerHTML = "0";
             indicator.classList.add('indicator-searching')
+            throttlingFrequency=100;
             detectPosition();
-            detectPositionTimer = setInterval(detectPosition, 500);
+            detectPositionTimer = setInterval(detectPosition, 100);
 
             noSleep.enable();
 
@@ -223,6 +225,7 @@ window.addEventListener('load', _ => {
         positionLocked = true
         possitiveSound.play();
         currentScore = 0;
+        throttlingFrequency=500
         window.navigator.vibrate([100, 100, 100]);
 
         lockBtn.innerHTML = "Stop";
@@ -237,7 +240,9 @@ window.addEventListener('load', _ => {
     let temp = {
         x: -3535
     }
+    let history='';
     function detectPosition() {
+        history+=Math.abs(temp.x - axe)+'';
         if (Math.abs(temp.x - axe) < 4) {
             positionDetectionConfidence++;
 
@@ -256,6 +261,7 @@ window.addEventListener('load', _ => {
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
             console.log('Good position detected')
+            alert(history)
             lockPosition();
         }
     }
