@@ -242,6 +242,7 @@ window.addEventListener('load', _ => {
 
         } else {
             positionDetectionConfidence = 0;
+            navigator.vibrate([100])
             console.log('Confidence reset')
             temp.x = axe
         }
