@@ -227,7 +227,7 @@ window.addEventListener('load', _ => {
         currentScore = 0;
         throttlingFrequency=500
         window.navigator.vibrate([100, 100, 100]);
-        history='';
+       // history='';
         lockBtn.innerHTML = "Stop";
 
     }
@@ -243,13 +243,13 @@ window.addEventListener('load', _ => {
     let history='';
     function detectPosition() {
         history+=Math.abs(temp.x - axe)+'-';
-        if (Math.abs(temp.x - axe) < 4) {
+        if (Math.abs(temp.x - axe) <= 5) {
             positionDetectionConfidence++;
 
         } else {
             positionDetectionConfidence = 0;
-            navigator.vibrate([100])
-            console.log('Confidence reset')
+            history+='[reset]'
+            //console.log('Confidence reset')
             temp.x = axe
         }
         if (getComputedStyle(lockBtn).borderWidth == '3px') {
@@ -257,11 +257,11 @@ window.addEventListener('load', _ => {
         } else {
             lockBtn.style.borderWidth = '3px'
         }
-        if (positionDetectionConfidence > 5) {
+        if (positionDetectionConfidence > 10) {
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
-            console.log('Good position detected')
-            alert(history)
+            document.querySelector('.op').innerHTML=history;
+            history='';
             lockPosition();
         }
     }
