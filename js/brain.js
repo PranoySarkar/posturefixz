@@ -7,7 +7,7 @@ var options = {
 };
 var chart = null;
 var data = [
-    ['time', 'beta', 'pureBeta'],
+    ['time', 'mod-beta', 'pureBeta'],
     [0, 0, 0]
 ];
 
@@ -16,7 +16,7 @@ let index=0
 let BETA = 0;
 let pureBeta=0;
 let tempBeta
-let lastSomeBeta=[1,2,1,2,1,1,1,2,3,2,1,1,2,1,1,2,1,2,1,1,1,2,3,2,1,1,2,1,1,2,1,2,1,1,1,2,3,2,1,1,2,1];
+let lastSomeBeta=[1,2,1,2,1,1,1,2,3,2,1,1,2,1,1,2,1,2,1,1,1,2,3,2];
 const temp={
     lastBetaAvarage:0
 }
@@ -25,13 +25,11 @@ const temp={
 window.addEventListener('deviceorientation', (event) => {
     tempBeta = Number.parseInt(Math.abs(event.beta - 90).toFixed(2));
     pureBeta=tempBeta;
-    let avg = lastSomeBeta.reduce((acc,snd)=>acc+snd)/lastSomeBeta.length;
-
     lastSomeBeta.shift();
     lastSomeBeta.push(tempBeta)
-    if(Math.abs(avg-tempBeta)<2){
-        BETA=tempBeta+.5;
-    }
+    let avg = lastSomeBeta.reduce((acc,snd)=>acc+snd)/lastSomeBeta.length;
+    BETA=avg;
+    console.log(Math.abs(avg-tempBeta))
     
 });
 
@@ -66,7 +64,7 @@ function clean() {
     leanFbData.innerHTML = '';
     tiltLrData.innerHTML = '';
     data = [
-        ['time', 'lean-Forward-Back', 'tilt-left-right'],
+        ['time', 'mod-beta', 'pure beta'],
         [0, 0, 0]
     ];
     update();
