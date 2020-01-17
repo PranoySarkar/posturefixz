@@ -36,7 +36,16 @@
 <body>
     <div class="play">
         <!--  <div class="ball"></div> -->
-        <div id="curve_chart" style="width: 900px; height: 500px"></div>
+        <div id="curve_chart" style="width: 100vw; height: 500px"></div>
+        <button onclick="clean()">Clean</button>
+        <div class="leanfb">
+            Lean FB
+            <div class="leanFbData"></div>
+        </div>
+        <div class="leanfb">
+            Tilt lr
+            <div class="tiltLrData"></div>
+        </div>
     </div>
     <script>
 
@@ -63,15 +72,43 @@
 
         let index = 0;
         //let ball = document.querySelector('.ball');
+        let lastBeta = 0;
+        let avgBetaDiff = 0
+
+        let lastGama=0;
+        let avgGamaDiff=0;
+        
+        const leanFbData =document.querySelector('.leanFbData')
+        const tiltLrData= document.querySelector('.tiltLrData')
         window.addEventListener('deviceorientation', (event) => {
+            refBeta = event.beta - 90;
             index++;
-            data.push([index, event.beta, event.gamma])
+            data.push([index, refBeta, event.gamma])
+
+            avgBetaDiff = Number.parseFloat(((Math.abs(refBeta - lastBeta) + avgBetaDiff) / 2).toFixed(2));
+            lastBeta = refBeta;
+
+            avgGamaDiff = Number.parseFloat(((Math.abs(event.gamma - lastGama) + avgGamaDiff) / 2).toFixed(2));
+            lastGama = event.gamma;
+
             if (index % 10 == 0) {
+                leanFbData.innerHTML+='   &nbsp;&nbsp;&nbsp;&nbsp;'+avgBetaDiff
+                tiltLrData.innerHTML+='   &nbsp;&nbsp;&nbsp;&nbsp;'+avgGamaDiff
                 update();
             }
             //    ball.style.left = (200 + (event.gamma)) + 'px';
             //ball.style.top = (200 + (event.beta)) + 'px'
         })
+        function clean() {
+            leanFbData.innerHTML='';
+            tiltLrData.innerHTML='';
+            data = [
+                ['time', 'lean-Forward-Back', 'tilt-left-right'],
+                [0, 0, 0]
+            ];
+            update();
+        }
+
     </script>
 </body>
 
