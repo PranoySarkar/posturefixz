@@ -30,18 +30,48 @@
             background: red;
         }
     </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body>
     <div class="play">
-        <div class="ball"></div>
+        <!--  <div class="ball"></div> -->
+        <div id="curve_chart" style="width: 900px; height: 500px"></div>
     </div>
     <script>
-        let ball=document.querySelector('.ball');
-     window.addEventListener('deviceorientation', (event) => {
-        ball.style.left=(200+(event.gamma))+'px';
-        ball.style.top=(200+(event.beta))+'px'
-    })
+
+
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+        var options = {
+            title: 'Accelerometer',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+        var chart = null;
+        var data = [
+            ['time', 'lean-Forward-Back', 'tilt-left-right'],
+            [0, 0, 0]
+        ];
+        function drawChart() {
+            chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+            update();
+        }
+        function update() {
+            chart.draw(google.visualization.arrayToDataTable(data), options);
+        }
+
+        let index = 0;
+        //let ball = document.querySelector('.ball');
+        window.addEventListener('deviceorientation', (event) => {
+            index++;
+            data.push([index, event.beta, event.gamma])
+            if (index % 10 == 0) {
+                update();
+            }
+            //    ball.style.left = (200 + (event.gamma)) + 'px';
+            //ball.style.top = (200 + (event.beta)) + 'px'
+        })
     </script>
 </body>
 
