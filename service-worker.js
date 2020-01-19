@@ -1,4 +1,4 @@
-let version = 1.20;
+let version = 1.21;
 
 let cacheName = "posturefixz" + version;
 

@@ -255,7 +255,7 @@ window.addEventListener('load', _ => {
             history.success = true;
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
-            document.querySelector('.op').innerHTML = history;
+           // document.querySelector('.op').innerHTML = history;
             lockPosition();
         }
     }
