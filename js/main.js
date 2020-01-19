@@ -1,4 +1,4 @@
-let analytics = {}
+
 
 window.addEventListener('load', _ => {
     Settings.initIfNot();
@@ -28,19 +28,15 @@ window.addEventListener('load', _ => {
     let lockedAxis = {};
     let positionLocked = false
 
-    let flag = true;
-    let xDom = document.querySelector('#x');
-    let yDom = document.querySelector('#y');
-    let zDom = document.querySelector('#z');
-    let op = document.querySelector('#op');
+
+
     let lockBtn = document.querySelector('#lockBtn');
     let delta = document.querySelector('#delta');
     delta.value = Number.parseInt(Settings.getSensitivity());
     delta.addEventListener('change', updateSensitivity)
     delta.addEventListener('keyup', updateSensitivity)
-    let allAxis = document.querySelector('#allAxis');
-    let portraitRadioY = document.querySelector('#yAxis');
-    let landscapeRadioZ = document.querySelector('#zAxis');
+
+
     const currentScoreValue = document.querySelector('#currentScoreValue')
     const maxScoreValue = document.querySelector('#maxScoreValue');
     maxScoreValue.innerHTML = Math.floor(maxScore);
@@ -91,98 +87,79 @@ window.addEventListener('load', _ => {
     })
 
 
+    registerListener(positionUpdate)
+
     let throttled = false;
-    window.addEventListener('deviceorientation', (event) => {
+    function positionUpdate(event) {
 
         if (!throttled) {
             throttled = true;
             setTimeout((event) => {
-                op.innerHTML += ''
+
+                let beta = event.beta;
+                let gamma = event.gamma;
 
 
-                let alpha = Math.abs(Math.floor(event.alpha));
-                let beta = Math.abs(Math.floor(event.beta));
-                let gamma = Math.abs(Math.floor(event.gamma));
-                let status = ''
                 if (positionLocked === true) {
+                    // for position locked
                     let goodPosition = true;
 
-                    if (allAxis.checked && false && Math.abs(alpha - lockedAxis.x) > Number.parseFloat(delta.value)) {
+                    if ((Math.abs(beta - lockedAxis.y)) > Number.parseFloat(delta.value)) {
                         goodPosition = false;
                         notifyIncorrectPosture();
                     }
-                    if ((allAxis.checked || portraitRadioY.checked) && (Math.abs(beta - lockedAxis.y)) > Number.parseFloat(delta.value)) {
-                        status += `Beta ${beta} Locked  ${lockedAxis.y} diff ${(Math.abs(beta - lockedAxis.y))}`
+                    if ((Math.abs(gamma - lockedAxis.z) > Number.parseFloat(delta.value))) {
                         goodPosition = false;
                         notifyIncorrectPosture();
                     }
-                    if ((allAxis.checked || landscapeRadioZ.checked || true) && 
-                    (Math.abs(gamma - lockedAxis.z) > Number.parseFloat(delta.value))) {
-                         goodPosition = false;
-                        status += `<br/>Gama ${gamma} Locked  ${lockedAxis.z} diff ${Math.abs(gamma - lockedAxis.z)}`
-                        notifyIncorrectPosture();
-                    }
-                    
+
                     if (goodPosition) {
 
                         if (incorrectPostureTimer != null) {
+                            // good position found && clean previous incorrect position timer
                             clearInterval(incorrectPostureTimer);
                             incorrectPostureTimer = null;
                             repositionSound.play();
                             window.navigator.vibrate([100, 100, 100]);
                         }
                         if (positionLocked === true) {
+                            // increase current score
                             currentScore += .3;
                             indicator.classList.add('indicator-goodPosture')
                             indicator.classList.remove('indicator-badPosture')
                         }
 
                     } else {
-                        status += ` Status ${goodPosition} <br />`
+                        // for bad position
                         if (positionLocked === true) {
+                            // decrease current score
                             currentScore = currentScore > .15 ? currentScore - .15 : 0;
                             indicator.classList.add('indicator-badPosture')
                             indicator.classList.remove('indicator-goodPosture')
                         }
                     }
                     if (currentScore > maxScore) {
+                        // new max score
                         maxScore = currentScore;
                         Settings.setMaxScore(maxScore);
                         maxScoreValue.innerHTML = Math.floor(currentScore);
                     }
                     currentScoreValue.innerHTML = Math.floor(currentScore);
-                    op.innerHTML += `<br /> ${status}`
-
                 }
                 else {
-                   // op.innerHTML = ``
+                    // op.innerHTML = ``
                     clearInterval(incorrectPostureTimer)
                     incorrectPostureTimer = null;
-                    axe = Math.abs(Math.floor(event.alpha));
-                    if (allAxis.checked) {
-                        xDom.innerHTML = `X ${axe}`;
-                    } else {
-                        xDom.innerHTML = ''
-                    }
-                    ye = Math.abs(Math.floor(event.beta));
-                    if (allAxis.checked || portraitRadioY.checked) {
-                        yDom.innerHTML = `Y ${ye}`;
-                    }
-                    else {
-                        yDom.innerHTML = ''
-                    }
-                    zee = Math.abs(Math.floor(event.gamma));
-                    if (allAxis.checked || landscapeRadioZ.checked) {
-                        zDom.innerHTML = `Z ${zee}`;
-                    } else {
-                        zDom.innerHTML = ''
-                    }
+                    // update beta and gamma
+
+                    ye = (event.beta);
+                    zee = (event.gamma);
                 }
                 throttled = false;
             }, throttlingFrequency, event)
         }
 
-    })
+    }
 
     let incorrectPostureTimer = null;
 
@@ -202,8 +179,7 @@ window.addEventListener('load', _ => {
     const noSleep = new NoSleep();
     let detectPositionTimer = null;
     document.querySelector('#lockBtn').addEventListener('click', event => {
-        analytics.detectPosition = []
-        analytics.move = [];
+
 
         if (positionLocked === 'IN_PROGRESS' || positionLocked == true) {
             clearInterval(detectPositionTimer);
@@ -236,7 +212,6 @@ window.addEventListener('load', _ => {
         lockedAxis.y = ye;
         lockedAxis.z = zee;
         positionLocked = true
-        analytics.lockedAxis = lockedAxis;
         possitiveSound.play();
         currentScore = 0;
         throttlingFrequency = 500
@@ -252,29 +227,30 @@ window.addEventListener('load', _ => {
 
     let positionDetectionConfidence = 0;
     let temp = {
-        x: -3535
+        y: -9613,
+        z: -9613
     }
 
-    let history='';
+    let history = '';
 
     function detectPosition() {
-       
 
-        history+=axe+'-'
-        if (Math.abs(temp.x - axe) <= 5) {
+        history += `[ ${temp.y} ${temp.z}]`
+        if (Math.abs(temp.y - ye) <= 5 && Math.abs(temp.z-zee)<=5) {
             positionDetectionConfidence++;
-            
+
         } else {
-            history+= 'reset';
+            history += 'reset';
             positionDetectionConfidence = 0;
-            temp.x = axe
+            temp.y = ye;
+            temp.z=zee;
         }
         if (getComputedStyle(lockBtn).borderWidth == '3px') {
             lockBtn.style.borderWidth = '4px'
         } else {
             lockBtn.style.borderWidth = '3px'
         }
-     
+
         if (positionDetectionConfidence > 10) {
             history.success = true;
             positionDetectionConfidence = 0;
@@ -282,7 +258,6 @@ window.addEventListener('load', _ => {
             document.querySelector('.op').innerHTML = history;
             lockPosition();
         }
-        analytics.detectPosition.push(history)
     }
 
 
