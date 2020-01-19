@@ -96,10 +96,9 @@ window.addEventListener('load', _ => {
             throttled = true;
             setTimeout((event) => {
 
-                let beta = event.beta;
-                let gamma = event.gamma;
-
-
+                let beta = Math.round(event.beta*1000)/1000;
+                let gamma = Math.round(event.gamma*1000)/1000;
+                
                 if (positionLocked === true) {
                     // for position locked
                     let goodPosition = true;
@@ -107,10 +106,12 @@ window.addEventListener('load', _ => {
                     if ((Math.abs(beta - lockedAxis.y)) > Number.parseFloat(delta.value)) {
                         goodPosition = false;
                         notifyIncorrectPosture();
+                        document.querySelector('#readings').innerHTML+=`Y[${beta}] z[${gamma}] Y-False ${Math.abs(beta - lockedAxis.y)}<br>`
                     }
-                    if ((Math.abs(gamma - lockedAxis.z) > Number.parseFloat(delta.value))) {
+                    if ((Math.abs(gamma - lockedAxis.z) > (Number.parseFloat(delta.value)))) {
                         goodPosition = false;
                         notifyIncorrectPosture();
+                        document.querySelector('#readings').innerHTML+=`Y[${beta}] z[${gamma}] Z-False ${Math.abs(gamma - lockedAxis.z)}<br>`
                     }
 
                     if (goodPosition) {
@@ -255,7 +256,7 @@ window.addEventListener('load', _ => {
             history.success = true;
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
-           // document.querySelector('.op').innerHTML = history;
+           document.querySelector('#gen').innerHTML = `y= [${temp.y}], z=[${temp.z}] delta=${delta.value}`;
             lockPosition();
         }
     }
