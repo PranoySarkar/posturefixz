@@ -1,5 +1,5 @@
 
-
+let positionDetectionConfidence = 0;
 window.addEventListener('load', _ => {
     Settings.initIfNot();
 
@@ -96,9 +96,9 @@ window.addEventListener('load', _ => {
             throttled = true;
             setTimeout((event) => {
 
-                let beta = Math.round(event.beta*1000)/1000;
-                let gamma = Math.round(event.gamma*1000)/1000;
-                
+                let beta = Math.round(event.beta * 1000) / 1000;
+                let gamma = Math.round(event.gamma * 1000) / 1000;
+
                 if (positionLocked === true) {
                     // for position locked
                     let goodPosition = true;
@@ -106,12 +106,12 @@ window.addEventListener('load', _ => {
                     if ((Math.abs(beta - lockedAxis.y)) > Number.parseFloat(delta.value)) {
                         goodPosition = false;
                         notifyIncorrectPosture();
-                        document.querySelector('#readings').innerHTML+=`Y[${beta}] z[${gamma}] Y-False ${Math.abs(beta - lockedAxis.y)}<br>`
+                        document.querySelector('#readings').innerHTML += `Y[${beta}] z[${gamma}] Y-False ${Math.abs(beta - lockedAxis.y)}<br>`
                     }
                     if ((Math.abs(gamma - lockedAxis.z) > (Number.parseFloat(delta.value)))) {
                         goodPosition = false;
                         notifyIncorrectPosture();
-                        document.querySelector('#readings').innerHTML+=`Y[${beta}] z[${gamma}] Z-False ${Math.abs(gamma - lockedAxis.z)}<br>`
+                        document.querySelector('#readings').innerHTML += `Y[${beta}] z[${gamma}] Z-False ${Math.abs(gamma - lockedAxis.z)}<br>`
                     }
 
                     if (goodPosition) {
@@ -121,7 +121,7 @@ window.addEventListener('load', _ => {
                             clearInterval(incorrectPostureTimer);
                             incorrectPostureTimer = null;
                             repositionSound.play();
-                         //   window.navigator.vibrate([100, 100, 100]);
+                            //   window.navigator.vibrate([100, 100, 100]);
                         }
                         if (positionLocked === true) {
                             // increase current score
@@ -166,10 +166,10 @@ window.addEventListener('load', _ => {
 
     function notifyIncorrectPosture() {
         if (incorrectPostureTimer == null) {
-           // window.navigator.vibrate([200]);
+            // window.navigator.vibrate([200]);
             negativeSound.play();
             incorrectPostureTimer = setInterval(_ => {
-              //  window.navigator.vibrate([200]);
+                //  window.navigator.vibrate([200]);
                 negativeSound.play();
             }, 2000)
         }
@@ -198,6 +198,7 @@ window.addEventListener('load', _ => {
             currentScoreValue.innerHTML = "0";
             indicator.classList.add('indicator-searching')
             throttlingFrequency = 100;
+            positionDetectionConfidence=0;
             detectPosition();
             detectPositionTimer = setInterval(detectPosition, 100);
 
@@ -226,7 +227,7 @@ window.addEventListener('load', _ => {
         Settings.setSensitivity(this.value)
     }
 
-    let positionDetectionConfidence = 0;
+
     let temp = {
         y: -9613,
         z: -9613
@@ -237,14 +238,14 @@ window.addEventListener('load', _ => {
     function detectPosition() {
 
         history += `[ ${temp.y} ${temp.z}]`
-        if (Math.abs(temp.y - ye) <= 5 && Math.abs(temp.z-zee)<=5) {
+        if (Math.abs(temp.y - ye) <= 5 && Math.abs(temp.z - zee) <= 5) {
             positionDetectionConfidence++;
 
         } else {
             history += 'reset';
             positionDetectionConfidence = 0;
             temp.y = ye;
-            temp.z=zee;
+            temp.z = zee;
         }
         if (getComputedStyle(lockBtn).borderWidth == '3px') {
             lockBtn.style.borderWidth = '4px'
@@ -256,7 +257,7 @@ window.addEventListener('load', _ => {
             history.success = true;
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
-           document.querySelector('#gen').innerHTML = `y= [${temp.y}], z=[${temp.z}] delta=${delta.value}`;
+            document.querySelector('#gen').innerHTML = `y= [${temp.y}], z=[${temp.z}] delta=${delta.value}`;
             lockPosition();
         }
     }
