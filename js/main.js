@@ -1,5 +1,6 @@
 
 let positionDetectionConfidence = 0;
+let history = '';
 window.addEventListener('load', _ => {
     Settings.initIfNot();
 
@@ -106,13 +107,13 @@ window.addEventListener('load', _ => {
                     if ((Math.abs(beta - lockedAxis.y)) > Number.parseFloat(delta.value)) {
                         goodPosition = false;
                         notifyIncorrectPosture();
-                        document.querySelector('#readings').innerHTML += `Y[${beta}] z[${gamma}] Y-False ${Math.abs(beta - lockedAxis.y)}<br>`
+                        document.querySelector('#readings').innerHTML += `Y[${beta}] z[${gamma}] Y-False ${Math.abs(beta - lockedAxis.y)}<br/>`
                     }
-                    if ((Math.abs(gamma - lockedAxis.z) > (Number.parseFloat(delta.value)))) {
+                   /* if ((Math.abs(gamma - lockedAxis.z) > (Number.parseFloat(delta.value)))) {
                         goodPosition = false;
                         notifyIncorrectPosture();
                         document.querySelector('#readings').innerHTML += `Y[${beta}] z[${gamma}] Z-False ${Math.abs(gamma - lockedAxis.z)}<br>`
-                    }
+                    }*/
 
                     if (goodPosition) {
 
@@ -198,6 +199,8 @@ window.addEventListener('load', _ => {
             currentScoreValue.innerHTML = "0";
             indicator.classList.add('indicator-searching')
             throttlingFrequency = 100;
+            document.querySelector('#gen').innerHTML='';
+            history = '';
             positionDetectionConfidence=0;
             detectPosition();
             detectPositionTimer = setInterval(detectPosition, 100);
@@ -233,11 +236,11 @@ window.addEventListener('load', _ => {
         z: -9613
     }
 
-    let history = '';
+
 
     function detectPosition() {
 
-        history += `[ ${temp.y} ${temp.z}]`
+        history += `[${positionDetectionConfidence}-${temp.y}]`
         if (Math.abs(temp.y - ye) <= 5 && Math.abs(temp.z - zee) <= 5) {
             positionDetectionConfidence++;
 
@@ -257,7 +260,7 @@ window.addEventListener('load', _ => {
             history.success = true;
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
-            document.querySelector('#gen').innerHTML = `y= [${temp.y}], z=[${temp.z}] delta=${delta.value}`;
+            document.querySelector('#gen').innerHTML = `${history}<br/><br/>y= [${temp.y}] delta=${delta.value}`;
             lockPosition();
         }
     }
