@@ -121,7 +121,7 @@ window.addEventListener('load', _ => {
                             clearInterval(incorrectPostureTimer);
                             incorrectPostureTimer = null;
                             repositionSound.play();
-                            window.navigator.vibrate([100, 100, 100]);
+                         //   window.navigator.vibrate([100, 100, 100]);
                         }
                         if (positionLocked === true) {
                             // increase current score
@@ -166,10 +166,10 @@ window.addEventListener('load', _ => {
 
     function notifyIncorrectPosture() {
         if (incorrectPostureTimer == null) {
-            window.navigator.vibrate([200]);
+           // window.navigator.vibrate([200]);
             negativeSound.play();
             incorrectPostureTimer = setInterval(_ => {
-                window.navigator.vibrate([200]);
+              //  window.navigator.vibrate([200]);
                 negativeSound.play();
             }, 2000)
         }
@@ -216,7 +216,7 @@ window.addEventListener('load', _ => {
         possitiveSound.play();
         currentScore = 0;
         throttlingFrequency = 500
-        window.navigator.vibrate([100, 100, 100]);
+        //window.navigator.vibrate([100, 100, 100]);
         // history='';
         lockBtn.innerHTML = "Stop";
 
