@@ -7,14 +7,14 @@ var options = {
 };
 var chart = null;
 var data = [
-    ['time', 'beta', 'pure-beta', 'gamma', 'pure-gamma'],
-    [0, 0, 0, 0, 0]
+    ['time', 'gamma', 'pure-gamma'],
+    [0, 0, 0]
 ];
 
 registerListener(updateData);
 let index = 0;
 function updateData(event) {
-    data.push([index++, BETA, pureBeta, GAMMA, pureGamma]);
+    data.push([index++, GAMMA, pureGamma]);
     update()
 }
 
@@ -43,8 +43,8 @@ function clean() {
     leanFbData.innerHTML = '';
     tiltLrData.innerHTML = '';
     data = [
-        ['time', 'beta', 'pure-beta', 'gamma', 'pure-gamma'],
-        [0, 0, 0, 0, 0]
+        ['time', 'gamma', 'pure-gamma'],
+        [0, 0, 0]
     ];
     update();
 } 
