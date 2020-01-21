@@ -12,7 +12,6 @@ img {
 
 .container {
     min-height: 100vh;
-    max-width: 500px;
     position: relative;
     box-sizing: border-box
 }
@@ -324,6 +323,7 @@ video {
     height: 100%;
     width: 200px;
 }
+
 .avatars {
     justify-content: space-around;
 }
@@ -340,7 +340,7 @@ footer {
     padding: 10px;
     margin: -10px;
     margin-top: 10px;
-    background: #4a4c4d;
+    background: #953c3c;
     color: #e8e8e8;
 }
 
@@ -357,9 +357,9 @@ footer {
     right: 0;
     height: 100%;
     width: calc(100% - 500px);
-    /* border-left: 6px solid #ffffff; */
     box-sizing: border-box;
-    /* box-shadow: 0 0 9px 6px #b7afaf;*/
+    overflow: hidden;
+    display: none;
 }
 
 .bigScreenInfo {
@@ -369,10 +369,35 @@ footer {
     /* background: aliceblue; */
     transform: translate(-50%, -50%);
     color: #fbfbfb;
+
 }
-.bigScreenInfo a,.bigScreenInfo a:visited{
+
+
+.bigScreenInfo a,
+.bigScreenInfo a:visited {
     text-decoration: none;
     color: #ffffff;
     font-size: 1.2rem;
     font-weight: 600;
+}
+
+@media only screen and (min-width:800px) {
+    .bigFullScreen {
+        display: block;
+    }
+
+    .container {
+        max-width: 500px;
+    }
+
+    .qr {
+        width: 130px;
+        height: 130px;
+        background-image: url("/assets/qr.png");
+        background-size: cover;
+        position: absolute;
+        top: -120px;
+        right: 0;
+        box-shadow: 0 0 4px 2px #00000047;
+    }
 }

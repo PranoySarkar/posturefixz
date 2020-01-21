@@ -28,6 +28,7 @@ window.addEventListener('load', _ => {
     let zee = 0;
     let lockedAxis = {};
     let positionLocked = false
+    let accelerometerAccessed=false;
 
 
 
@@ -88,7 +89,7 @@ window.addEventListener('load', _ => {
     })
 
 
-    registerListener(positionUpdate)
+
 
     let throttled = false;
     function positionUpdate(event) {
@@ -182,6 +183,21 @@ window.addEventListener('load', _ => {
     let detectPositionTimer = null;
     document.querySelector('#lockBtn').addEventListener('click', event => {
 
+        if(!accelerometerAccessed){
+            registerListener(positionUpdate).then(_=>{
+                accelerometerAccessed=true;
+                start();
+            })
+        }
+        else{
+            start();
+        }
+        
+      
+
+    })
+
+    function start(){
 
         if (positionLocked === 'IN_PROGRESS' || positionLocked == true) {
             clearInterval(detectPositionTimer);
@@ -208,8 +224,7 @@ window.addEventListener('load', _ => {
             noSleep.enable();
 
         }
-
-    })
+    }
 
     function lockPosition() {
 

@@ -17,10 +17,34 @@ const temp = {
 
 let callback;
 
+
+
+
 function registerListener(_callback) {
-    window.addEventListener('deviceorientation', updatePosition);
-    callback = _callback;
-    return this;
+    // Go to Settings > Safari > Advanced > Website data
+    return new Promise((resolve, reject) => {
+        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+            DeviceOrientationEvent.requestPermission().then(permissionState => {
+                if (permissionState === 'granted') {
+                    window.addEventListener('deviceorientation', updatePosition);
+                    callback = _callback;
+                    resolve();
+                }else{
+                    reject('permission needed');
+                }
+            })
+                .catch(err => {
+                    reject('permission needed');
+                });
+        } else {
+            window.addEventListener('deviceorientation', updatePosition);
+            callback = _callback;
+            resolve();
+        }
+    });
+
+
+
 }
 
 
