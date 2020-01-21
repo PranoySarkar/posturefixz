@@ -384,19 +384,23 @@ footer {
 @media only screen and (min-width:800px) {
     .bigFullScreen {
         display: block;
+        z-index: -10;
     }
 
     .container {
         max-width: 500px;
+        box-shadow: 4px 13px 9px 0 #994040;
+        z-index: 1000;
+        background: #fff;
     }
 
     .qr {
-        width: 130px;
-        height: 130px;
+        width: 200px;
+        height: 200px;
         background-image: url("/assets/qr.png");
         background-size: cover;
         position: absolute;
-        top: -120px;
+        top: -180px;
         right: 0;
         box-shadow: 0 0 4px 2px #00000047;
     }

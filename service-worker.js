@@ -1,6 +1,6 @@
-let version = 1.22;
+let version = 1.27;
 
-let cacheName = "posturefixz" + version;
+let cacheName = "posturecorrector" + version;
 
 let filesToCache = [
   "/",
