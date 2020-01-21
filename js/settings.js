@@ -8,7 +8,7 @@ var Settings = {
     },
     getSensitivity:()=>{
         let settings= JSON.parse(localStorage.getItem('settings'));
-        return settings.sensitivity || 4;
+        return settings.sensitivity || 5;
     },
     setSensitivity:(sensitivity)=>{
         let settings= JSON.parse(localStorage.getItem('settings'));

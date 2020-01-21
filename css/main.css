@@ -25,7 +25,7 @@ img {
 
 
 header {
-    background-image: linear-gradient(45deg, #9C27B0, #fd7d7d);
+    background-image: linear-gradient(45deg, #ff1e1e, #feb5b5);
     color: #FFF;
     font-size: 2rem;
     box-shadow: 0 0 3px 0px #acacac;
@@ -43,7 +43,7 @@ header::before {
     content: "";
     width: 10px;
     height: 10px;
-    background-image: linear-gradient(45deg, #FCE4EC, #FFEB3B);
+    background-image: linear-gradient(45deg, #f4e4fc, #ffffff);
     position: absolute;
     top: 86%;
     left: 0px;
@@ -350,3 +350,29 @@ footer {
     justify-content: space-between;
 }
 
+.bigFullScreen {
+    background-image: linear-gradient(143deg, #fd5a5a69, #ff0000);
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: calc(100% - 500px);
+    /* border-left: 6px solid #ffffff; */
+    box-sizing: border-box;
+    /* box-shadow: 0 0 9px 6px #b7afaf;*/
+}
+
+.bigScreenInfo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* background: aliceblue; */
+    transform: translate(-50%, -50%);
+    color: #fbfbfb;
+}
+.bigScreenInfo a,.bigScreenInfo a:visited{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+}

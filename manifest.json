@@ -1,34 +1,34 @@
 {
   "name": "Posture Fixz",
   "short_name": "PostureFixz",
-  "start_url": "/posturefixz/",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff",
   "theme_color": "#ba68c8",
   "icons": [
     {
-      "src": "/posturefixz/assets/icons/icon.png",
+      "src": "/assets/icons/icon.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "/posturefixz/assets/icons/icon.png",
+      "src": "/assets/icons/icon.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src":"/posturefixz/assets/icons/icon.png",
+      "src":"/assets/icons/icon.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "/posturefixz/assets/icons/icon.png",
+      "src": "/assets/icons/icon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/posturefixz/assets/icons/icon.png",
+      "src": "/assets/icons/icon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
