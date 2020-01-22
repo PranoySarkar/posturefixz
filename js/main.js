@@ -181,10 +181,10 @@ window.addEventListener('load', _ => {
     function notifyIncorrectPosture() {
         if (incorrectPostureTimer == null) {
             vibrate([200]);
-            playSound(negativeSound);
+            playSound('negativeSound');
             incorrectPostureTimer = setInterval(_ => {
                 vibrate([200]);
-                playSound(negativeSound);
+                playSound('negativeSound');
             }, 2000)
         }
     }
@@ -263,7 +263,7 @@ window.addEventListener('load', _ => {
         lockedAxis.y = ye;
         lockedAxis.z = zee;
         positionLocked = true
-        playSound(possitiveSound)
+        playSound('possitiveSound')
 
         currentScore = 0;
         throttlingFrequency = 500
