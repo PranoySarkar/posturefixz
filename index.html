@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" href="assets/icons/icon.png" sizes="32x32">
     <link rel="icon" type="image/png" href="assets/icons/icon.png" sizes="16x16">
     <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> -->
-    <meta name="theme-color" content="#FFFFFF">
+    <meta name="theme-color" content="#640700">
     <link rel="manifest" href="manifest.json">
 
     <link rel="stylesheet" href="css/main.css">
@@ -87,7 +87,7 @@
                 <div class="op"></div>
 
                 <div class="sensitivityGroup">
-                    <label for="delta">Level</label>
+                    <label for="delta">Sensitivity</label>
                     <select name="" id="delta">
                         <option value="15">Low 1</option>
                         <option value="14">Low 2</option>
@@ -105,15 +105,13 @@
                         <option value="2">Extreme 14</option>
                         <option value="1">Extreme 15</option>
                     </select>
-
                 </div>
-
-                <div class="stats">
-                    <div class="output" id="gen"></div>
-                    <div class="output" id="readings"></div>
-                    <div class="output" id="z"></div>
+                <div class="controls">
+                    <div class="eachControls">
+                        <input type="checkbox" name="vibration" id="vibrationChkb">
+                        <label for="vibrationChkb">vibration</label>
+                    </div>
                 </div>
-
                 <div>
                     <div class="orientation">
                         <div class="radioGroup">
@@ -177,14 +175,24 @@
 
             </div>
             <footer>
+                <div class="externalLinks">
+                    <a href="https://forms.gle/ZPSoiH3SK9PNzPbo6">Feedback</a>
+                    <a href="http://https://forms.gle/VuDLd6aKy3GEwJmeA">Ratings</a>
+                    <a href="http://https://forms.gle/VuDLd6aKy3GEwJmeA">Contact US</a>
+                </div>
                 <div class="copyRightDiv"></div>
                 <script>
-                    document.querySelector('.copyRightDiv').innerHTML = `<div>version 1.27</div>
+                    document.querySelector('.copyRightDiv').innerHTML = `<div>version 1.28</div>
                             <div>&copy; ${new Date().getFullYear()}</div>`
                 </script>
             </footer>
 
             <div class="hiddenElements">
+                <div class="stats">
+                    <div class="output" id="gen"></div>
+                    <div class="output" id="readings"></div>
+                    <div class="output" id="z"></div>
+                </div>
 
             </div>
 
@@ -206,7 +214,7 @@
     <script type="text/javascript">
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker
-                .register(`./service-worker.js`)
+                .register(`https://posturecorrector.app/service-worker.js`)
                 .then(function () {
                     console.log("Service Worker Registered");
                 });

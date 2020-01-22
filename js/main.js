@@ -28,7 +28,7 @@ window.addEventListener('load', _ => {
     let zee = 0;
     let lockedAxis = {};
     let positionLocked = false
-    let accelerometerAccessed=false;
+    let accelerometerAccessed = false;
 
 
 
@@ -43,6 +43,17 @@ window.addEventListener('load', _ => {
     const maxScoreValue = document.querySelector('#maxScoreValue');
     maxScoreValue.innerHTML = Math.floor(maxScore);
     const indicator = document.querySelector('#indicator');
+
+    let vibrationEnabled = Settings.getVibration();
+    let vibrationChkb = document.querySelector(`#vibrationChkb`)
+    if(vibrationEnabled){
+        vibrationChkb.checked=true;
+    }
+    vibrationChkb.addEventListener('change',event=>{
+            Settings.setVibration(event.target.checked)
+            vibrationEnabled =event.target.checked;
+    })
+    
 
     document.querySelector('#whatsAppShare').addEventListener('click', _ => {
         let anchor = document.createElement('a');
@@ -111,11 +122,11 @@ window.addEventListener('load', _ => {
                         notifyIncorrectPosture();
                         document.querySelector('#readings').innerHTML += `Y[${beta}] z[${gamma}] Y-False ${Math.abs(beta - lockedAxis.y)}<br/>`
                     }
-                   /* if ((Math.abs(gamma - lockedAxis.z) > (Number.parseFloat(delta.value)))) {
-                        goodPosition = false;
-                        notifyIncorrectPosture();
-                        document.querySelector('#readings').innerHTML += `Y[${beta}] z[${gamma}] Z-False ${Math.abs(gamma - lockedAxis.z)}<br>`
-                    }*/
+                    /* if ((Math.abs(gamma - lockedAxis.z) > (Number.parseFloat(delta.value)))) {
+                         goodPosition = false;
+                         notifyIncorrectPosture();
+                         document.querySelector('#readings').innerHTML += `Y[${beta}] z[${gamma}] Z-False ${Math.abs(gamma - lockedAxis.z)}<br>`
+                     }*/
 
                     if (goodPosition) {
 
@@ -123,8 +134,8 @@ window.addEventListener('load', _ => {
                             // good position found && clean previous incorrect position timer
                             clearInterval(incorrectPostureTimer);
                             incorrectPostureTimer = null;
-                            repositionSound.play();
-                            //   window.navigator.vibrate([100, 100, 100]);
+                            playSound('repositionSound');
+                            vibrate([100, 100, 100]);
                         }
                         if (positionLocked === true) {
                             // increase current score
@@ -169,36 +180,55 @@ window.addEventListener('load', _ => {
 
     function notifyIncorrectPosture() {
         if (incorrectPostureTimer == null) {
-            // window.navigator.vibrate([200]);
-            negativeSound.play();
+            vibrate([200]);
+            playSound(negativeSound);
             incorrectPostureTimer = setInterval(_ => {
-                //  window.navigator.vibrate([200]);
-                negativeSound.play();
+                vibrate([200]);
+                playSound(negativeSound);
             }, 2000)
         }
+    }
 
+    function playSound(type) {
+        switch (type) {
+            case 'negativeSound':
+                negativeSound.play();
+                break;
+            case 'possitiveSound':
+                possitiveSound.play();
+                break;
+            case 'repositionSound':
+                repositionSound.play()
+                break;
+        }
 
+    }
+
+    function vibrate(seq) {
+        if (vibrationEnabled) {
+            window.navigator.vibrate(seq);
+        }
     }
 
     const noSleep = new NoSleep();
     let detectPositionTimer = null;
     document.querySelector('#lockBtn').addEventListener('click', event => {
 
-        if(!accelerometerAccessed){
-            registerListener(positionUpdate).then(_=>{
-                accelerometerAccessed=true;
+        if (!accelerometerAccessed) {
+            registerListener(positionUpdate).then(_ => {
+                accelerometerAccessed = true;
                 start();
             })
         }
-        else{
+        else {
             start();
         }
-        
-      
+
+
 
     })
 
-    function start(){
+    function start() {
 
         if (positionLocked === 'IN_PROGRESS' || positionLocked == true) {
             clearInterval(detectPositionTimer);
@@ -207,7 +237,7 @@ window.addEventListener('load', _ => {
             indicator.classList.remove('indicator-searching')
             indicator.classList.remove('indicator-goodPosture')
             indicator.classList.remove('indicator-badPosture')
-            window.navigator.vibrate([100, 100, 100]);
+            vibrate([100, 100, 100]);
             noSleep.disable();
 
         } else {
@@ -216,9 +246,9 @@ window.addEventListener('load', _ => {
             currentScoreValue.innerHTML = "0";
             indicator.classList.add('indicator-searching')
             throttlingFrequency = 100;
-            document.querySelector('#gen').innerHTML='';
+            document.querySelector('#gen').innerHTML = '';
             history = '';
-            positionDetectionConfidence=0;
+            positionDetectionConfidence = 0;
             detectPosition();
             detectPositionTimer = setInterval(detectPosition, 100);
 
@@ -233,10 +263,11 @@ window.addEventListener('load', _ => {
         lockedAxis.y = ye;
         lockedAxis.z = zee;
         positionLocked = true
-        possitiveSound.play();
+        playSound(possitiveSound)
+
         currentScore = 0;
         throttlingFrequency = 500
-        //window.navigator.vibrate([100, 100, 100]);
+        vibrate([100, 100, 100]);
         // history='';
         lockBtn.innerHTML = "Stop";
 

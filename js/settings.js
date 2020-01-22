@@ -33,5 +33,15 @@ var Settings = {
         settings.version=version;
         localStorage.setItem('settings', JSON.stringify(settings))
     },
+    getVibration:()=>{
+        let settings= JSON.parse(localStorage.getItem('settings'));
+        return settings.vibration || false;
+    },
+    setVibration:(vibration)=>{
+        let settings= JSON.parse(localStorage.getItem('settings'));
+        settings.vibration=vibration;
+        localStorage.setItem('settings', JSON.stringify(settings))
+    },
+    
 
 }

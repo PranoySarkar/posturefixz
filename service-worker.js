@@ -1,4 +1,4 @@
-let version = 1.27;
+let version = 1.28;
 
 let cacheName = "posturecorrector" + version;
 

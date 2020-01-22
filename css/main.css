@@ -24,7 +24,7 @@ img {
 
 
 header {
-    background-image: linear-gradient(45deg, #ff1e1e, #feb5b5);
+    background-image: linear-gradient(45deg, #e00f00, #cb281c);
     color: #FFF;
     font-size: 2rem;
     box-shadow: 0 0 3px 0px #acacac;
@@ -36,13 +36,17 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 header::before {
     content: "";
     width: 10px;
     height: 10px;
-    background-image: linear-gradient(45deg, #f4e4fc, #ffffff);
     position: absolute;
     top: 86%;
     left: 0px;
@@ -52,7 +56,7 @@ header::before {
 
 header h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 1.4rem;
 }
 
 header img {
@@ -66,6 +70,7 @@ header img {
 
 .body {
     padding: 10px;
+    margin-top: 60px;
 }
 
 .stats {
@@ -340,7 +345,7 @@ footer {
     padding: 10px;
     margin: -10px;
     margin-top: 10px;
-    background: #953c3c;
+    background: #640700;
     color: #e8e8e8;
 }
 
@@ -381,6 +386,37 @@ footer {
     font-weight: 600;
 }
 
+.controls {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.eachControls {
+    display: flex;
+    align-items: center;
+}
+
+.eachControls label {
+    cursor: pointer;
+}
+
+.externalLinks {
+    padding: 10px 0 40px 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.externalLinks a {
+    color: #fff;
+    text-decoration: none;
+    /* border: 1px solid #a42b2b; */
+    padding: 5px 10px;
+    border-radius: 10px;
+    /* background: #F44336; */
+    box-shadow: 0 0 5px 0px #969696;
+}
+
 @media only screen and (min-width:800px) {
     .bigFullScreen {
         display: block;
@@ -392,6 +428,14 @@ footer {
         box-shadow: 4px 13px 9px 0 #994040;
         z-index: 1000;
         background: #fff;
+    }
+
+    header {
+        position: unset;
+    }
+
+    .body {
+        margin-top: unset;
     }
 
     .qr {
