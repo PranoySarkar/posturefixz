@@ -5,17 +5,15 @@ window.addEventListener('load', _ => {
     Settings.initIfNot();
 
     fetch(`config.json?cacheBust=${new Date().getTime()}`).then(response => { return response.json() }).then(config => {
+        
+        document.querySelector('.copyRightDiv').innerHTML = `<div>Posture Corrector ${config.version}</div><div>&copy; ${new Date().getFullYear()}</div>`;
+
         if (Settings.getVersion() == 0) {
             Settings.setVersion(config.version)
         }
         else if (Settings.getVersion() != config.version) {
-            Settings.setVersion(config.version)
-            fetch(`config.json?clean-cache=true&cacheBust=${new Date().getTime()}`).then(_ => {
-                document.body.append('cache cleaned')
-
-                window.location.reload(true);
-            })
-
+            Settings.setVersion(config.version);
+            window.location.reload(true);
         }
     })
 
