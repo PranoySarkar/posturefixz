@@ -311,14 +311,14 @@ window.addEventListener('load', _ => {
         }
     }
 
-    document.querySelector('.downloadCancelButton').addEventListener('click', cancelDownloadPrompt)
+    
     function cancelDownloadPrompt() {
         document.querySelector('.downloadPrompt').style.display = 'none';
     }
 
     document.querySelector('.downloadButton').addEventListener('click', downloadButtonClicked)
     function downloadButtonClicked(){
-        cancelDownloadPrompt();
+       // cancelDownloadPrompt();
         deferredPrompt.prompt();  // Wait for the user to respond to the prompt
         deferredPrompt.userChoice
             .then(function (choiceResult) {
@@ -341,7 +341,7 @@ window.addEventListener('load', _ => {
 
     var deferredPrompt;
 
-    window.addEventListener('beforeinstallprompt', function (e) {
+   window.addEventListener('beforeinstallprompt', function (e) {
         // Prevent Chrome 67 and earlier from automatically showing the prompt
         e.preventDefault();
         // Stash the event so it can be triggered later.
