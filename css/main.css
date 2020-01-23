@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     color: #636363;
@@ -254,6 +258,10 @@ header img {
     padding-top: 10px;
 }
 
+#appHelp {
+    padding-top: 100px;
+}
+
 a.linkIcon {
     text-decoration: none;
     position: absolute;
@@ -341,6 +349,7 @@ video {
 #help b {
     color: #c90f00;
 }
+
 footer {
     border-top: 1px solid #e5dada;
     /* background: #efefef; */
@@ -420,15 +429,67 @@ footer {
     /* background: #F44336; */
     box-shadow: 0 0 5px 0px #969696;
 }
+
 .disclaimer {
     /* border: 1px solid; */
     padding: 10px;
     padding-bottom: 45px;
 }
+
+.downloadPrompt {
+    position: fixed;
+    top: 100px;
+    padding: 10px;
+    background: #ffffff;
+    width: 70%;
+    height: 200px;
+    left: 15%;
+    border-radius: 3px;
+    border: 1px solid #ff9c9c;
+    box-shadow: 0px 0px 9px 4px #7608008c;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    display:none;
+}
+
+.promptCancel {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.promptControllers {
+    text-align: center;
+}
+
+.promptControllers button {
+    width: 50%;
+    max-width: 150px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.promptBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 88px;
+    transform: rotate(0deg);
+}
+
 @media only screen and (min-width:800px) {
     .bigFullScreen {
         display: block;
         z-index: -10;
+    }
+
+    .downloadPrompt {
+        display: none;
+
     }
 
     .container {

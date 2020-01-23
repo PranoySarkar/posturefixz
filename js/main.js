@@ -4,18 +4,19 @@ let history = '';
 window.addEventListener('load', _ => {
     Settings.initIfNot();
 
-    fetch(`config.json?cacheBust=${new Date().getTime()}`).then(response => { return response.json() }).then(config => {
-        
-        document.querySelector('.copyRightDiv').innerHTML = `<div>Posture Corrector ${config.version}</div><div>&copy; ${new Date().getFullYear()}</div>`;
+    fetch(`config.json?cacheBust=${new Date().getTime()}`)
+        .then(response => { return response.json() })
+        .then(config => {
+            document.querySelector('.copyRightDiv').innerHTML = `<div>Posture Corrector ${config.version + ''}</div><div>&copy; ${new Date().getFullYear()}</div>`;
 
-        if (Settings.getVersion() == 0) {
-            Settings.setVersion(config.version)
-        }
-        else if (Settings.getVersion() != config.version) {
-            Settings.setVersion(config.version);
-            window.location.reload(true);
-        }
-    })
+            if (Settings.getVersion() == 0) {
+                Settings.setVersion(config.version)
+            }
+            else if (Settings.getVersion() != config.version) {
+                Settings.setVersion(config.version);
+                window.location.reload(true);
+            }
+        })
 
     let currentScore = 0;
     let maxScore = Settings.getMaxScore();
@@ -44,14 +45,14 @@ window.addEventListener('load', _ => {
 
     let vibrationEnabled = Settings.getVibration();
     let vibrationChkb = document.querySelector(`#vibrationChkb`)
-    if(vibrationEnabled){
-        vibrationChkb.checked=true;
+    if (vibrationEnabled) {
+        vibrationChkb.checked = true;
     }
-    vibrationChkb.addEventListener('change',event=>{
-            Settings.setVibration(event.target.checked)
-            vibrationEnabled =event.target.checked;
+    vibrationChkb.addEventListener('change', event => {
+        Settings.setVibration(event.target.checked)
+        vibrationEnabled = event.target.checked;
     })
-    
+
 
     document.querySelector('#whatsAppShare').addEventListener('click', _ => {
         let anchor = document.createElement('a');
@@ -310,5 +311,44 @@ window.addEventListener('load', _ => {
         }
     }
 
+    document.querySelector('.downloadCancelButton').addEventListener('click', cancelDownloadPrompt)
+    function cancelDownloadPrompt() {
+        document.querySelector('.downloadPrompt').style.display = 'none';
+    }
+
+    document.querySelector('.downloadButton').addEventListener('click', downloadButtonClicked)
+    function downloadButtonClicked(){
+        cancelDownloadPrompt();
+        deferredPrompt.prompt();  // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice
+            .then(function (choiceResult) {
+
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the A2HS prompt');
+                } else {
+                    console.log('User dismissed the A2HS prompt');
+                }
+
+                deferredPrompt = null;
+
+            })
+    }
+
+    function showDownloadPrompt() {
+        document.querySelector('.downloadPrompt').style.display = 'grid';
+        
+    }
+
+    var deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', function (e) {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+
+        showDownloadPrompt();
+
+    });
 
 })
