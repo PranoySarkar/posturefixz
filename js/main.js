@@ -241,7 +241,7 @@ window.addEventListener('load', _ => {
 
         } else {
             positionLocked = 'IN_PROGRESS'
-            lockBtn.innerHTML = "Detecting Position";
+            lockBtn.innerHTML = "Detecting Posture";
             currentScoreValue.innerHTML = "0";
             indicator.classList.add('indicator-searching')
             throttlingFrequency = 100;
@@ -306,7 +306,7 @@ window.addEventListener('load', _ => {
             }
             else {
                 start();
-                document.querySelector('#troubleShoot').scrollIntoView({ behavior: 'smooth' })
+                document.querySelector('#goTotroubleShoot').click();
             }
 
         }

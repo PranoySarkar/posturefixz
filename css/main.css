@@ -1,5 +1,6 @@
 html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: #FFF0;
 }
 
 body {
@@ -438,10 +439,6 @@ footer {
 
 .downloadPrompt {
     position: absolute;
-    width: 208px;
-    left: 0;
-    width: 158px;
-            display: none;
 }
 
 .promptCancel {
@@ -451,12 +448,10 @@ footer {
     cursor: pointer;
 }
 
-.promptControllers {
-    text-align: center;
-}
+
 
 .promptControllers button {
-    width: 50%;
+    width: 80px;
     max-width: 150px;
     height: 35px;
     cursor: pointer;
@@ -467,6 +462,7 @@ footer {
     border-radius: 7px;
     padding: 10;
     box-shadow: 0 0 4px 0px #843191;
+    -webkit-tap-highlight-color: #FFF0;
 }
 
 .promptBody {
@@ -486,6 +482,25 @@ footer {
 
 #troubleShoot{
     padding-top: 100px;
+}
+
+.buttonLinks {
+    text-decoration: none;
+    border: 1px solid;
+    padding: 10px;
+    margin: 20px auto;
+    display: block;
+    text-align: center;
+    max-width: 100px;
+    border-radius: 2px;
+    box-shadow: 0 0 7px 2px #0000003b;
+}
+
+.footerLink {
+    color: white;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
 }
 @media only screen and (min-width:800px) {
     .bigFullScreen {
