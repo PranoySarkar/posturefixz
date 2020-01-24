@@ -1,6 +1,6 @@
 
 let positionDetectionConfidence = 0;
-let history = '';
+let positionTrail = [];
 window.addEventListener('load', _ => {
     Settings.initIfNot();
 
@@ -246,11 +246,10 @@ window.addEventListener('load', _ => {
             indicator.classList.add('indicator-searching')
             throttlingFrequency = 100;
             document.querySelector('#gen').innerHTML = '';
-            history = '';
+            positionTrail = [];
             positionDetectionConfidence = 0;
             detectPosition();
             detectPositionTimer = setInterval(detectPosition, 100);
-
             noSleep.enable();
 
         }
@@ -267,7 +266,6 @@ window.addEventListener('load', _ => {
         currentScore = 0;
         throttlingFrequency = 500
         vibrate([100, 100, 100]);
-        // history='';
         lockBtn.innerHTML = "Stop";
 
     }
@@ -285,13 +283,10 @@ window.addEventListener('load', _ => {
 
 
     function detectPosition() {
-
-        history += `[${positionDetectionConfidence}-${temp.y}]`
         if (Math.abs(temp.y - ye) <= 5 && Math.abs(temp.z - zee) <= 5) {
+            positionTrail.push(temp)
             positionDetectionConfidence++;
-
         } else {
-            history += 'reset';
             positionDetectionConfidence = 0;
             temp.y = ye;
             temp.z = zee;
@@ -303,52 +298,64 @@ window.addEventListener('load', _ => {
         }
 
         if (positionDetectionConfidence > 10) {
-            history.success = true;
             positionDetectionConfidence = 0;
             clearInterval(detectPositionTimer);
-            document.querySelector('#gen').innerHTML = `${history}<br/><br/>y= [${temp.y}] delta=${delta.value}`;
-            lockPosition();
+
+            if (isAuthenticPosition(positionTrail)) {
+                lockPosition();
+            }
+            else {
+                start();
+                document.querySelector('#troubleShoot').scrollIntoView({ behavior: 'smooth' })
+            }
+
         }
     }
 
-    
+    function isAuthenticPosition(positionTrail) {
+        let op = positionTrail.reduce((first, second) => {
+            return {
+
+                y: first.y - second.y,
+                z: first.z - second.z
+            }
+        })
+        if (op.y == 0 && op.z == 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+
+
     function cancelDownloadPrompt() {
         document.querySelector('.downloadPrompt').style.display = 'none';
     }
 
     document.querySelector('.downloadButton').addEventListener('click', downloadButtonClicked)
-    function downloadButtonClicked(){
-       // cancelDownloadPrompt();
-        deferredPrompt.prompt();  // Wait for the user to respond to the prompt
+    function downloadButtonClicked() {
+        deferredPrompt.prompt();
         deferredPrompt.userChoice
             .then(function (choiceResult) {
-
                 if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the A2HS prompt');
-                } else {
-                    console.log('User dismissed the A2HS prompt');
+                    cancelDownloadPrompt();
+                    deferredPrompt = null;
                 }
-
-                deferredPrompt = null;
-
             })
     }
 
     function showDownloadPrompt() {
         document.querySelector('.downloadPrompt').style.display = 'grid';
-        
+
     }
 
     var deferredPrompt;
-
-   window.addEventListener('beforeinstallprompt', function (e) {
-        // Prevent Chrome 67 and earlier from automatically showing the prompt
+    window.addEventListener('beforeinstallprompt', function (e) {
         e.preventDefault();
-        // Stash the event so it can be triggered later.
         deferredPrompt = e;
-
         showDownloadPrompt();
-
     });
 
 })

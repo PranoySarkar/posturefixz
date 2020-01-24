@@ -21,7 +21,7 @@ let callback;
 
 
 function registerListener(_callback) {
-    // Go to Settings > Safari > Advanced > Website data
+    
     return new Promise((resolve, reject) => {
         if (typeof DeviceOrientationEvent.requestPermission === 'function') {
             DeviceOrientationEvent.requestPermission().then(permissionState => {

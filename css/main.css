@@ -479,7 +479,14 @@ footer {
     width: 88px;
     transform: rotate(0deg);
 }
+.max-width-200{
+    max-width: 200px;
+    margin: auto;
+}
 
+#troubleShoot{
+    padding-top: 100px;
+}
 @media only screen and (min-width:800px) {
     .bigFullScreen {
         display: block;
