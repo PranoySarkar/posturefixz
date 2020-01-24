@@ -439,6 +439,7 @@ footer {
 
 .downloadPrompt {
     position: absolute;
+    display: none;
 }
 
 .promptCancel {
