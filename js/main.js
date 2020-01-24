@@ -13,8 +13,14 @@ window.addEventListener('load', _ => {
                 Settings.setVersion(config.version)
             }
             else if (Settings.getVersion() != config.version) {
-                Settings.setVersion(config.version);
-                window.location.reload(true);
+
+                fetch(`config.json?clean-cache=true&cacheBust=${new Date().getTime()}`).then(_ => {
+                    //actually cleans the cache
+                    Settings.setVersion(config.version);
+                    window.location.reload(true);
+                });
+
+
             }
         })
 

@@ -1,4 +1,4 @@
-let version = 1.34;
+let version = 1.35;
 
 let cacheName = "posturecorrector" + version;
 
@@ -10,7 +10,7 @@ let filesToCache = [
   "/js/settings.js",
   "/js/NoSleep.min.js",
   "/css/main.css",
-  "/assets/screen.jpg",
+  "/assets/posture-corrector.jpg",
   "/assets/icons/icon.png",
   "/assets/icons/facebook.jpg",
   "/assets/icons/twitter.jpg",
@@ -20,6 +20,7 @@ let filesToCache = [
   "/assets/audio/reposition.json",
   "/assets/tshirt-with-pocket.jpg",
   "/assets/girl_with_pouch.jpg",
+  "/assets/iphone-issue.jpg",
   'https://fonts.googleapis.com/css?family=Open+Sans&display=swap',
   'https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxK.woff2',
 ];
