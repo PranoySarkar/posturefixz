@@ -6,111 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        .play {
-            background: aliceblue;
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-        }
-
-        body {
-            margin: 0;
-        }
-
-        .ball {
-            border: 1px solid #ffb1b1;
-            width: 100px;
-            height: 100px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            background: red;
-        }
-    </style>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script defer src="js/accelerometer.js"></script>
-    <script defer src="js/brain.js"></script>
 </head>
 
 <body>
-    <div class="play">
-        <!--  <div class="ball"></div> -->
-        <div id="curve_chart" style="width: 100vw; height: 500px"></div>
-        <button onclick="clean()">Clean</button>
-        <div class="leanfb">
-            Lean FB
-            <div class="leanFbData"></div>
-        </div>
-        <div class="leanfb">
-            Tilt lr
-            <div class="tiltLrData"></div>
-        </div>
-    </div>
+    <button id="btn" >Click</button>
     <script>
-
-
-       /*  google.charts.load('current', { 'packages': ['corechart'] });
-        google.charts.setOnLoadCallback(drawChart);
-        var options = {
-            title: 'Accelerometer',
-            curveType: 'function',
-            legend: { position: 'bottom' }
-        };
-        var chart = null;
-        var data = [
-            ['time', 'lean-Forward-Back', 'tilt-left-right'],
-            [0, 0, 0]
-        ];
-        function drawChart() {
-            chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-            update();
-        }
-        function update() {
-            chart.draw(google.visualization.arrayToDataTable(data), options);
-        }
-
-        let index = 0;
-        //let ball = document.querySelector('.ball');
-        let lastBeta = 0;
-        let avgBetaDiff = 0
-
-        let lastGama=0;
-        let avgGamaDiff=0;
-        
-        const leanFbData =document.querySelector('.leanFbData')
-        const tiltLrData= document.querySelector('.tiltLrData')
-        window.addEventListener('deviceorientation', (event) => {
-            refBeta = event.beta - 90;
-            index++;
-            data.push([index, refBeta, event.gamma])
-
-            avgBetaDiff = Number.parseFloat(((Math.abs(refBeta - lastBeta) + avgBetaDiff) / 2).toFixed(2));
-            lastBeta = refBeta;
-
-            avgGamaDiff = Number.parseFloat(((Math.abs(event.gamma - lastGama) + avgGamaDiff) / 2).toFixed(2));
-            lastGama = event.gamma;
-
-            if (index % 10 == 0) {
-                leanFbData.innerHTML+='   &nbsp;&nbsp;&nbsp;&nbsp;'+avgBetaDiff
-                tiltLrData.innerHTML+='   &nbsp;&nbsp;&nbsp;&nbsp;'+avgGamaDiff
-                update();
-            }
-            //    ball.style.left = (200 + (event.gamma)) + 'px';
-            //ball.style.top = (200 + (event.beta)) + 'px'
+        document.querySelector('#btn').addEventListener('click',()=>{
+            repositionSound.muted=true;
+            repositionSound.play().catch(e=>{
+                console.log(e)
+            });
+            repositionSound.pause();
+            repositionSound.muted=false;
+            setInterval(palySound,1000)
         })
-        function clean() {
-            leanFbData.innerHTML='';
-            tiltLrData.innerHTML='';
-            data = [
-                ['time', 'lean-Forward-Back', 'tilt-left-right'],
-                [0, 0, 0]
-            ];
-            update();
-        } */
+        
+        function palySound(){
+            repositionSound.play()
+        }
+       
+        let repositionSound = { play: () => { } };
+       
+        setTimeout(_ => {
+            fetch('assets/audio/reposition.json').then(res => res.json()).then(media => {
+                repositionSound = new Audio(media.reposition);
+                
+            })
 
+        }, 1000)
     </script>
 </body>
 
