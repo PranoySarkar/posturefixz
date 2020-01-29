@@ -205,6 +205,22 @@ window.addEventListener('load', _ => {
             case 'repositionSound':
                 repositionSound.play()
                 break;
+            case 'muted_all':
+                possitiveSound.muted=true;
+                possitiveSound.play();
+                possitiveSound.pause();
+                possitiveSound.muted=false;
+
+                repositionSound.muted=true;
+                repositionSound.play();
+                repositionSound.pause();
+                repositionSound.muted=false;
+
+                negativeSound.muted=true;
+                negativeSound.play();
+                negativeSound.pause();
+                negativeSound.muted=false;
+                break;
         }
 
     }
@@ -218,6 +234,7 @@ window.addEventListener('load', _ => {
     const noSleep = new NoSleep();
     let detectPositionTimer = null;
     document.querySelector('#lockBtn').addEventListener('click', event => {
+        playSound('muted_all');
 
         if (!accelerometerAccessed) {
             registerListener(positionUpdate).then(_ => {
@@ -228,10 +245,9 @@ window.addEventListener('load', _ => {
         else {
             start();
         }
-
-
-
     })
+
+
 
     function start() {
 
@@ -246,6 +262,7 @@ window.addEventListener('load', _ => {
             noSleep.disable();
 
         } else {
+            
             positionLocked = 'IN_PROGRESS'
             lockBtn.innerHTML = "Detecting Posture";
             currentScoreValue.innerHTML = "0";
