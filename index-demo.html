@@ -9,8 +9,9 @@
 </head>
 
 <body>
-    <button id="btn" >Click</button>
+    <button id="btn" disabled>Click</button>
     <script>
+     
         document.querySelector('#btn').addEventListener('click',()=>{
             repositionSound.muted=true;
             repositionSound.play().catch(e=>{
@@ -30,6 +31,9 @@
         setTimeout(_ => {
             fetch('assets/audio/reposition.json').then(res => res.json()).then(media => {
                 repositionSound = new Audio(media.reposition);
+                setTimeout(_=>{
+                    document.querySelector('#btn').disabled=false;
+                },2000)
                 
             })
 
