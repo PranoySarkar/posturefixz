@@ -2,7 +2,7 @@
  ##### Posture corrector is a 👦 fun habit changing app which notifies  📳 you when you are not sitting properly.
 
 
-# [Install Now](https:///posturefixz/)
+# [Install Now](https://www.posturecorrector.app/)
 
 #### How to use Posture Corrector?
 - Sit properly and relax as shown in the above video
